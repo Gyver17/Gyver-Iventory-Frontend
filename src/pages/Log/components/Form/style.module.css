@@ -1,0 +1,109 @@
+.form {
+  background: var(--quaternary);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  border-radius: 5%;
+  box-shadow: 0px 0px 5px 5px var(--box_shadow_3);
+}
+
+.form h3 {
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  color: var(--font_color_2);
+  border-bottom: 1px solid var(--primary);
+}
+
+.form form {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+form .mail,
+form .password {
+  position: relative;
+  border-bottom: 1px solid var(--secondary);
+  margin: 30px 0px;
+}
+.mail input,
+.password input {
+  width: 100%;
+  padding: 0px 10px;
+  height: 40px;
+  font-size: 14px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.mail label,
+.password label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: var(--font_color_2);
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.mail span::before,
+.password span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: all 0.4s;
+}
+
+.mail input:focus ~ label,
+.password input:focus ~ label,
+.mail input:not(:placeholder-shown) ~ label,
+.password input:not(:placeholder-shown) ~ label {
+  top: -5px;
+  color: var(--primary);
+}
+
+.mail input:focus ~ span::before,
+.password input:focus ~ span::before,
+.mail input:not(:placeholder-shown) ~ span::before,
+.password input:not(:placeholder-shown) ~ span::before {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0px;
+  background: var(--secondary);
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--font_color_1);
+}
+
+.button:hover {
+  background: var(--primary);
+  transform: scale(1.05);
+  transition: all 0.3s ease-in;
+}
+
+@media screen and (max-width: 650px) {
+  .form {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .form {
+    width: 300px;
+  }
+}
+

@@ -1,0 +1,150 @@
+.tooltip {
+  list-style: none;
+  margin: 0px 10px;
+  position: relative;
+  padding: 0px 10px;
+  height: 100%;
+}
+
+.tooltip:hover {
+  background: var(--tertiary);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.title_tooltip {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+  height: 100%;
+  font-size: 30px;
+}
+
+.tooltip:hover > .title_tooltip div {
+  padding: 0px 8px;
+  transform: rotate(90deg);
+  transition: transform 0.4s;
+}
+
+.list {
+  list-style: none;
+  position: absolute;
+  top: 100px;
+  left: -10px;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  border: 3px solid var(--primary);
+}
+
+.list::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid var(--primary);
+  position: absolute;
+  top: -12px;
+  left: 22px;
+}
+
+.tooltip:hover > .list {
+  display: block;
+  top: 60px;
+  opacity: 1;
+  z-index: 2;
+  visibility: visible;
+  transition: all 0.4s ease;
+  box-shadow: 0px 0px 10px 0px var(--box_shadow_2);
+}
+
+.list .link {
+  text-decoration: none;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  background: var(--quaternary);
+  color: var(--font_color_2);
+  white-space: nowrap;
+}
+
+.list .link:hover {
+  top: 0px;
+  background: var(--primary);
+  color: var(--font_color_1);
+  z-index: 2;
+  transform: scale(1.15, 1);
+  transition: all 0.3s ease;
+}
+
+.link i,
+.link div {
+  padding: 0px 5px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 1200px) {
+  .tooltip {
+    margin: 0px 5px;
+    padding: 0px 5px;
+  }
+
+  .list .link {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .tooltip {
+    margin: 0px 5px;
+    padding: 0px 5px;
+  }
+  
+  .tooltip:hover {
+    transform: scale(1.1);
+  }
+  
+  .title_tooltip {
+    font-size: 25px;
+  }
+  
+  .tooltip:hover > .title_tooltip div {
+    padding: 0px 5px;
+  }
+  
+  .list {
+    border: 2px solid var(--primary);
+  }
+  
+  .list::before {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--primary);
+  }
+  
+  .tooltip:hover > .list {
+    box-shadow: 0px 0px 10px 0px var(--box_shadow_2);
+  }
+  
+  .list .link {
+    padding: 10px;
+  }
+  
+  .list .link:hover {
+    z-index: 7;
+    transform: scale(1.05, 1);
+  }
+  
+  .link i,
+  .link div {
+    padding: 0px 3px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,70 @@
+.container {
+  margin: 0px 5px;
+}
+
+.button_container {
+  background: none;
+  border: 2px;
+  border-radius: 20%;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  color: var(--font_color_1);
+}
+
+.button {
+  cursor: pointer;
+  background: var(--primary);
+  color: var(--font_color_1);
+  border-radius: 5%;
+  display: flex;
+  flex-direction: row;
+  border: 2px;
+  padding: 5px;
+}
+
+.button:hover {
+  transform: scale(1.2);
+  padding: 8px 8px;
+  background: var(--tertiary);
+  transition: all 0.3s ease;
+}
+
+.button i {
+  font-size: 20px;
+  padding: 2px 10px 2px 5px;
+}
+
+.button:hover > i {
+  padding-right: 2px;
+  transition: all 0.4s;
+}
+
+.logout {
+  padding: 2px 5px 2px 5px;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 1200px) {
+  .button:hover {
+    transform: scale(1.1);
+    padding: 8px 8px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  
+  .button:hover {
+    transform: scale(1.1);
+    padding: 5px 5px;
+  }
+  
+  .button i {
+    padding: 2px 5px 2px 5px;
+  }
+  
+  .logout {
+    font-size: 12px;
+  }
+}

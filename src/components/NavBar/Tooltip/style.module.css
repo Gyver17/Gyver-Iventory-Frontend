@@ -1,0 +1,214 @@
+.tooltip {
+  list-style: none;
+  margin: 0px 5px;
+  position: relative;
+  padding: 0px 10px;
+  height: 100%;
+}
+
+.tooltip input[type="checkbox"] {
+  display: none;
+}
+
+.tooltip:hover {
+  background: var(--primary);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.title_tooltip {
+  height: 100%;
+}
+
+.title_tooltip .title,
+.title_tooltip label {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+  font-size: 18px;
+  height: 100%;
+}
+
+.tooltip label {
+  display: none;
+}
+
+.title_tooltip i {
+  padding: 0px 5px;
+}
+
+.tooltip:hover > .title_tooltip .title i {
+  padding: 0px 8px;
+  transform: rotate(90deg);
+  transition: transform 0.4s ease;
+}
+
+.list {
+  list-style: none;
+  position: absolute;
+  top: 100px;
+  left: -10px;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.list::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid var(--quaternary);
+  position: absolute;
+  top: -12px;
+  left: 22px;
+}
+
+.tooltip:hover > .list {
+  display: block;
+  top: 60px;
+  opacity: 1;
+  z-index: 2;
+  visibility: visible;
+  transition: all 0.4s ease;
+  box-shadow: 0px 0px 10px 0px var(--box_shadow_3)
+}
+
+.list .link {
+  text-decoration: none;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  background: var(--quaternary);
+  color: var(--font_color_2);
+  white-space: nowrap;
+}
+
+.list .link:hover {
+  top: 0px;
+  background: var(--primary);
+  color: var(--font_color_1);
+  transform: scale(1.1, 1);
+  transition: all 0.3s ease;
+}
+
+.link i,
+.link div {
+  padding: 0px 5px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 1200px) {
+  .tooltip {
+    margin: 0px 5px;
+    padding: 0px 5px;
+  }
+
+  .title_tooltip .title,
+  .title_tooltip label {
+    font-size: 15px;
+  }
+
+  .title_tooltip i {
+    padding: 0px 5px;
+  }
+
+  .tooltip:hover > .title_tooltip i {
+    padding: 0px 8px;
+  }
+
+  .list::before {
+    left: 17px;
+  }
+
+  .tooltip:hover > .list {
+    top: 60px;
+  }
+
+  .list .link {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .tooltip {
+    height: auto;
+    margin: 0px;
+    padding: 15px;
+  }
+
+  .title_tooltip .title {
+    display: none;
+  }
+
+  .tooltip:hover {
+    background: none;
+    transform: scale(1);
+  }
+
+  .title_tooltip label {
+    display: flex;
+  }
+
+  #show_inventory:checked ~ .title_tooltip label,
+  #show_person:checked ~ .title_tooltip label,
+  #show_purchases:checked ~ .title_tooltip label,
+  #show_sales:checked ~ .title_tooltip label,
+  #show_consult:checked ~ .title_tooltip label {
+    font-size: 18px;
+  }
+
+  .list {
+    position: static;
+    *z-index: 6;
+    opacity: 1;
+    visibility: visible;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .tooltip:hover > .list {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+
+  .list::before {
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 0px solid white;
+  }
+
+  #show_inventory:checked ~ .list,
+  #show_person:checked ~ .list,
+  #show_purchases:checked ~ .list,
+  #show_sales:checked ~ .list,
+  #show_consult:checked ~ .list {
+    max-height: 100vh;
+    margin: 15px 0px;
+  }
+
+  #show_inventory:checked ~ .title_tooltip label i,
+  #show_person:checked ~ .title_tooltip label i,
+  #show_purchases:checked ~ .title_tooltip label i,
+  #show_sales:checked ~ .title_tooltip label i,
+  #show_consult:checked ~ .title_tooltip label i {
+    padding: 0px 8px;
+    transform: rotate(90deg);
+    transition: transform 0.4s ease;
+  }
+
+  .list .link {
+    background: none;
+    color: var(--font_color_1);
+  }
+
+  .list .link:hover {
+    transform: scale(1);
+  }
+}
