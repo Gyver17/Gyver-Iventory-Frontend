@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import './App.css';
-
-import '/home/gyver/Escritorio/Pratice/PERN-Stack-CRUD-AppProducts/client/src/Icons/style.css'
+import './Icons/style.css'
 
 import NavBar from './components/NavBar/NavBar';
 import Products from './pages/Inventory/Products/Products';
