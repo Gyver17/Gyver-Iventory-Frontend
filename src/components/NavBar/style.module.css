@@ -166,3 +166,25 @@
   }
 }
 
+@media screen and (max-width: 350px) {
+  .header .icon_menu {
+    display: block;
+    font-size: 25px;
+  }
+
+  #show_menu:checked ~ .NavBar {
+    left: 0%;
+  }
+
+  .home {
+    padding: 10px;
+  }
+
+  .home div {
+    padding: 0px 5px;
+  }
+
+  .home:hover {
+    padding: 15px 15px 10px 15px;
+  }
+}

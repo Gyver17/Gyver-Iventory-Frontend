@@ -56,11 +56,12 @@
   }
 
   .logo {
-    font-size: 18px;
+    font-size: 16px;
     padding: 0px 5px;
   }
 
   .img_logo {
+    width: 40px;
     padding: 5px;
   }
 

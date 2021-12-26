@@ -107,3 +107,9 @@ form .password {
   }
 }
 
+@media screen and (max-width: 350px) {
+  .form {
+    width: 250px;
+  }
+}
+
