@@ -54,6 +54,7 @@
   z-index: -1;
   opacity: 0;
   visibility: hidden;
+  background: var(--quaternary);
 }
 
 .list::before {
@@ -172,6 +173,7 @@
     visibility: visible;
     max-height: 0;
     overflow: hidden;
+    background: none;
   }
 
   .tooltip:hover > .list {
