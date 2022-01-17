@@ -2,47 +2,51 @@ import { useState, useContext } from 'react'
 import { AuthContext } from "../../../../context/authProvider"
 import styles from './style.module.css'
 import { types } from "../../../../context/authReducer"
-import { url } from '../../../../url'
 import { useNavigate } from 'react-router-dom'
+import { login } from './Functions/auth'
+import { valid } from './Functions/valid'
+import Loader from '../../../../components/Loader/Loader'
 
 const Form = () => {
     const navigate = useNavigate()
+
     const [user, setUser] = useState({
         mail: "",
         password: "",
     });
+    const [val, setVal] = useState({ message: '', valid: false })
+    const [loading, setLoading] = useState(false)
 
     const [, dispatch] = useContext(AuthContext)
 
-    const addSession = (data) =>{
+    const addSession = (data) => {
         dispatch({
             type: types.authLogin,
-            payload: {data}
+            payload: data
         })
         localStorage.setItem('data', JSON.stringify(data))
     }
 
     const handleSubmit = async (e) => {
         try {
+            setLoading(true)
             e.preventDefault();
-            const response = await fetch(
-                url + "login",
-                {
-                    method: "POST",
-                    mode: 'cors',
-                    credentials: 'include',
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(user),
-                }
-            );
-            const { data, message } = await response.json()
-            if(data){
-                await addSession(data);
-                navigate('/')
+            const validation = valid(user)
+            if (validation.bool) {
+                const auth = await login(user)
+                if (auth.data) {
+                    addSession(auth.data);
+                    navigate('/')
+                } else {
+                    setLoading(false)
+                    setVal({ message: auth.message, valid: true })
+                };
+            } else {
+                setLoading(false)
+                setVal({ message: validation.message, valid: true })
             }
-            console.log(message);
         } catch (error) {
-            console.log(error);
+            window.location.reload(true);
         }
     }
 
@@ -54,6 +58,7 @@ const Form = () => {
         <div className={styles.form}>
             <h3>Iniciar Sección</h3>
             <form>
+                {val.valid && <div className={styles.valid}>*{val.message}</div>}
                 <div className={styles.mail}>
                     <input
                         type="email"
@@ -72,11 +77,11 @@ const Form = () => {
                     <label>Contraseña:</label>
                     <span></span>
                 </div>
-                <input type="submit"
-                    value="Iniciar"
+                <button
                     className={styles.button}
-                    onClick={handleSubmit}
-                />
+                    onClick={handleSubmit} >
+                    {loading ? <Loader /> : 'Iniciar'}
+                </button>
             </form>
         </div>
     )

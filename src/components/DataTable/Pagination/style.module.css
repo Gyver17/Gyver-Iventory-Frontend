@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.container button {
+  margin: 0px 1px;
+  border: none;
+  cursor: pointer;
+}
+
+.selected {
+  height: 40px;
+  width: 40px;
+  background: var(--primary);
+  color: var(--font_color_1);
+}
+
+.around {
+  height: 35px;
+  width: 35px;
+  background: var(--secondary);
+  color: var(--font_color_1);
+}
+
+.around:hover, #changePage:hover {
+    background: var(--quaternay);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+#changePage {
+  height: 30px;
+  width: 30px;
+  background: var(--secondary);
+  color: var(--font_color_1);
+}

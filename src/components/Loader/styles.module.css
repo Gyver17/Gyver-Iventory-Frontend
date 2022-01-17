@@ -1,0 +1,22 @@
+.lds {
+  display: inline-block;
+  height: 20px;
+}
+.lds:after {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds 1.2s linear infinite;
+}
+@keyframes lds {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

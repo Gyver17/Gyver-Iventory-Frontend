@@ -1,0 +1,28 @@
+.container {
+  background: var(--secondary);
+  *background: #eeecea;
+  position: sticky;
+  width: 100%;
+  top: -1px;
+}
+
+.container tr {
+  width: 100%;
+  position: relative;
+}
+
+.index {
+  color: var(--quaternary);
+  border-right: 1px solid #eeecea;
+  border-bottom: 1px solid #eeecea;
+  font-size: 15px;
+  padding: 5px 10px;
+}
+
+.th {
+  color: var(--quaternary);
+  *border: 1px solid var(--secondary);
+  border-top: 2px solid #eeecea;
+  font-size: 15px;
+  padding: 5px 10px;
+}
