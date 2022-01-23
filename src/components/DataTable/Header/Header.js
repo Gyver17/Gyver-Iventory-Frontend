@@ -1,10 +1,7 @@
 import React from 'react'
 import styles from "./style.module.css"
 
-const Header = (props) => {
-    const options = props.options
-    const buttons = props.buttons
-    const selectValue = props.selectValue
+const Header = ({ options, buttons, selectValue }) => {
 
     return (
         <div className={styles.container}>

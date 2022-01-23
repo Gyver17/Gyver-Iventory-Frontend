@@ -30,3 +30,75 @@
   font-size: 30px;
   color: var(--quaternary);
 }
+
+@media screen and (max-width: 1200px) {
+  .container {
+    height: 35px;
+  }
+
+  .input {
+    height: 30px;
+    font-size: 15px;
+  }
+
+  .icon {
+    height: 35px;
+    width: 35px;
+  }
+
+  #iconSearch {
+    margin: 4px 15px 0px 3px;
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .container {
+    height: 32px;
+  }
+
+  .input {
+    height: 25px;
+    font-size: 13px;
+  }
+
+  .icon {
+    height: 32px;
+    width: 32px;
+  }
+
+  #iconSearch {
+    margin: 4px 15px 0px 3px;
+    font-size: 23px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    border: 3px solid var(--tertiary);
+    border-right: 3px;
+    padding: 0px;
+    height: 28px;
+  }
+  
+  .input {
+    height: 20px;
+    font-size: 13px;
+  }
+  
+  .icon {
+    height: 28px;
+    width: 28px;
+  }
+  
+  #iconSearch {
+    margin: 4px 15px 0px 4px;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .input {
+    font-size: 11px;
+  }
+}

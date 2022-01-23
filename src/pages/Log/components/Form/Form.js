@@ -3,7 +3,7 @@ import { AuthContext } from "../../../../context/authProvider"
 import styles from './style.module.css'
 import { types } from "../../../../context/authReducer"
 import { useNavigate } from 'react-router-dom'
-import { login } from './Functions/auth'
+import { login } from '../../../../api/log'
 import { valid } from './Functions/valid'
 import Loader from '../../../../components/Loader/Loader'
 

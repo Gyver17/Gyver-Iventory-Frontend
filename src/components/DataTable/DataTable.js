@@ -12,16 +12,7 @@ import TableHeader from "./TableHeader/TableHeader";
 import usePagesData from "./hooks/usePagesData"
 
 //Component
-const DataTable = (props) => {
-    const data = props.data
-    const title = props.titleTable
-    const numberOfEntries = props.numberOfEntries
-    const headerButtons = props.headerButtons
-    const header = props.header
-    const action = props.action
-    const formatDecimal = props.formatDecimal
-    const moneySymbol = props.moneySymbol
-    const aroundCurrentPage = props.aroundCurrentPage
+const DataTable = ({data, title, numberOfEntries, searchData, headerButtons, header, action, formatDecimal, moneySymbol, aroundCurrentPage}) => {
 
     const [pagesData,
         totalItems,
@@ -30,7 +21,7 @@ const DataTable = (props) => {
         setCurrentPage,
         setSearch,
         setItemsPerPage,
-        setSorting] = usePagesData(data, numberOfEntries, header)
+        setSorting] = usePagesData(data, numberOfEntries, searchData)
 
     return (
         <div className={styles.container}>
@@ -52,23 +43,26 @@ const DataTable = (props) => {
                 selectValue={(e) => setItemsPerPage(parseInt(e.target.value))}
             />
 
-            <table className={styles.table}>
-                <TableHeader
-                    header={header}
-                    action={action}
-                    onSorting={(field, order) =>
-                        setSorting({ field, order })
-                    }
-                />
+            {
+                pagesData &&
+                <table className={styles.table}>
+                    <TableHeader
+                        header={header}
+                        action={action}
+                        onSorting={(field, order) =>
+                            setSorting({ field, order })
+                        }
+                    />
 
-                <Table
-                    data={pagesData}
-                    header={header}
-                    formatDecimal={formatDecimal}
-                    moneySymbol={moneySymbol}
-                    action={action}
-                />
-            </table>
+                    <Table
+                        data={pagesData}
+                        header={header}
+                        formatDecimal={formatDecimal}
+                        moneySymbol={moneySymbol}
+                        action={action}
+                    />
+                </table>
+            }
 
             <Pagination
                 total={totalItems}

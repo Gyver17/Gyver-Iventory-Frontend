@@ -20,32 +20,35 @@ const UsersSetting = () => {
             title: "Nombre",
             field: "name",
             type: "string",
-            sortable: true,
-            search:true
+            sortable: true
         },
         {
             title: "Correo Electronico",
             field: "email",
             type: "string",
-            sortable: true,
-            search:true
+            sortable: true
         },
         {
             title: "Cuerpo",
             field: "body",
             type: "string",
             sortable: true,
-            search:true
+            search: true
         }
     ]
 
     const button = [
         {
             icon: 'icon iconplus',
-            tooltip: 'Agregar',
             onClick: () => console.log('Hola')
         }
     ]
+
+    const searchData = (data, value) => {
+        let expresion = new RegExp(`${value}.*`, "i")
+        return data.filter(
+            data => expresion.test(data.name) || expresion.test(data.email) || expresion.test(data.body))
+    }
 
     useEffect(() => {
         const getData = async () => {
@@ -61,8 +64,9 @@ const UsersSetting = () => {
     return (
         <div className={styles.container}>
             <DataTable
-                titleTable="DataTable"
+                title="DataTable"
                 numberOfEntries={[5, 10, 15, 20]}
+                searchData={searchData}
                 headerButtons={button}
                 header={column}
                 data={reqData}
@@ -72,12 +76,10 @@ const UsersSetting = () => {
                 action={[
                     {
                         icon: 'icon icondocument-edit1',
-                        tooltip: 'Editar',
                         onClick: (row) => console.log(row)
                     },
                     {
                         icon: 'icon icontrash-can3',
-                        tooltip: 'Eliminar',
                         onClick: (row) => console.log(row)
                     }
                 ]}

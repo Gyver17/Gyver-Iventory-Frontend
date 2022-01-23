@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import styles from "./style.module.css"
 
-const TableHeader = (props) => {
-    const header = props.header
-    const action = props.action
-    const onSorting = props.onSorting
+const TableHeader = ({ header, action, onSorting }) => {
+
 
     const [sortingField, setSortingField] = useState("");
     const [sortingOrder, setSortingOrder] = useState("asc");
@@ -21,7 +19,6 @@ const TableHeader = (props) => {
     return (
         <thead className={styles.container}>
             <tr>
-                <th key="index" className={styles.index}>#</th>
                 {
                     header.map(h => (
                         <th

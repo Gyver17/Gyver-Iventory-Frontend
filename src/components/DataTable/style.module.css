@@ -4,7 +4,7 @@
   padding: 10px;
   height: 100%;
   width: 100%;
-  background: #f0f2f3;
+  background: var(--cardBackground);
 }
 
 .titleAndSearch {
@@ -20,7 +20,6 @@
 }
 
 .table {
-  *table-layout: fixed;
   border-collapse: collapse;
   display: block;
   margin: auto;
@@ -34,23 +33,97 @@
 }
 
 .table::-webkit-scrollbar:vertical {
-  width:8px;
+  width: 8px;
 }
 
-.table::-webkit-scrollbar-button:increment,.table::-webkit-scrollbar-button {
+.table::-webkit-scrollbar-button:increment,
+.table::-webkit-scrollbar-button {
   display: none;
-} 
+}
 
 .table::-webkit-scrollbar:horizontal {
   height: 8px;
 }
 
 .table::-webkit-scrollbar-thumb {
-  background-color: #797979;
+  background-color: var(--scrollbarBackground);
   border-radius: 20px;
-  border: 2px solid #f1f2f3;
+  border: 2px solid var(--scrollbarBorder);
 }
 
 .table::-webkit-scrollbar-track {
-  border-radius: 10px;  
+  border-radius: 10px;
 }
+
+@media screen and (max-width: 1200px) {
+  .title {
+    font-size: 30px;
+    color: var(--secondary);
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .container {
+    padding: 5px;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .container {
+    padding: 5px;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    padding: 5px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .table {
+    max-height: 45vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .titleAndSearch {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (min-height: 650px) {
+  .table {
+    max-height: 60vh;
+  }
+}
+
+@media screen and (min-height: 800px) {
+  .table {
+    max-height: 65vh;
+  }
+}
+
+@media screen and (min-height: 900px) {
+  .table {
+    max-height: 70vh;
+  }
+}
+
+@media screen and (min-height: 1100px) {
+  .table {
+    max-height: 75vh;
+  }
+}
+

@@ -1,6 +1,5 @@
 .container {
   background: var(--secondary);
-  *background: #eeecea;
   position: sticky;
   width: 100%;
   top: -1px;
@@ -11,18 +10,20 @@
   position: relative;
 }
 
-.index {
+.th {
   color: var(--quaternary);
-  border-right: 1px solid #eeecea;
-  border-bottom: 1px solid #eeecea;
   font-size: 15px;
   padding: 5px 10px;
 }
 
-.th {
-  color: var(--quaternary);
-  *border: 1px solid var(--secondary);
-  border-top: 2px solid #eeecea;
-  font-size: 15px;
-  padding: 5px 10px;
+@media screen and (max-width: 950px) { 
+  .index {
+    font-size: 10px;
+    padding: 5px 5px;
+  }
+  
+  .th {
+    font-size: 10px;
+    padding: 5px 5px;
+  }
 }

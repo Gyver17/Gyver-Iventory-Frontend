@@ -1,22 +1,17 @@
 import React from 'react'
 import styles from "./style.module.css"
 
-const Table = (props) => {
-    const data = props.data
-    const header = props.header
-    const action = props.action
-    const format = props.formatDecimal
-    const symbol = props.moneySymbol
-
-    const formatDecimal = (number) => {
+const Table = ({data, header, action, formatDecimal, moneySymbol}) => {
+ 
+    const format = (number) => {
         const config = {
             minimumFractionDigits: 2
         }
-        if (format) {
-            if (format === "0,000.00") {
+        if (formatDecimal) {
+            if (formatDecimal === "0,000.00") {
                 return new Intl.NumberFormat('en-US', config).format(number)
             }
-            if (format === "0.000,00") {
+            if (formatDecimal === "0.000,00") {
                 return new Intl.NumberFormat('de-DE', config).format(number)
             }
             else {
@@ -26,19 +21,18 @@ const Table = (props) => {
             return new Intl.NumberFormat([], config).format(number)
         }
     }
-    console.log(data)
+
     return (
         <tbody className={styles.container}>
             {data.map((dt, index) => (
                 <tr key={index + 1} className={styles.tr}>
-                    <th className={styles.index}>{index + 1}</th>
                     {
                         header.map(h => (
                             <td>{
                                 h.type === "money" ?
-                                    symbol + formatDecimal(dt[h.field]) :
+                                    moneySymbol + format(dt[h.field]) :
                                     h.type === "numeric" ?
-                                        formatDecimal(dt[h.field]) :
+                                        format(dt[h.field]) :
                                         dt[h.field]
                             }</td>
                         ))
@@ -53,9 +47,6 @@ const Table = (props) => {
                                             <button className={styles.button} onClick={e => a.onClick(dt)}>
                                                 <i className={a.icon} />
                                             </button>
-                                            {/* <div className={styles.tooltip}>
-                                                {a.tooltip}
-                                            </div> */}
                                         </div>
                                     ))
                                 }

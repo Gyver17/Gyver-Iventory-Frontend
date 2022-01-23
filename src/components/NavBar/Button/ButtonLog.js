@@ -3,7 +3,6 @@ import { AuthContext } from "../../../context/authProvider"
 import { useNavigate } from "react-router-dom";
 import { types } from "../../../context/authReducer"
 import styles from './style.module.css'
-import { url } from '../../../url'
 
 const ButtonLog = () => {
     const navigate = useNavigate()
@@ -18,16 +17,8 @@ const ButtonLog = () => {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            const response = await fetch(url + "logout", {
-                method: "GET",
-                mode: 'cors',
-                credentials: 'include',
-                headers: { "Content-Type": "application/json" },
-            });
-            const message = await response.json();
             clearSession()
             navigate('/login')
-            console.log(message)
         } catch (error) {
             console.log(error)
         }

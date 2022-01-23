@@ -1,28 +1,18 @@
 .container {
-  max-height: 40vh;
   width: 100%;
   overflow: auto;
 }
 
-.index {
-  background: var(--secondary);
-  color: var(--quaternary);
-  border: 1px solid white;
-  font-size: 15px;
-}
-
 .tr {
-  background: #fbfafa;
-  *border: 1px solid var(--secondary);
+  background: var(rowsTableBackground);
   padding: 5px;
 }
 
 .tr:nth-child(even){
-  background: #f6f5f4;
+  background: var(--rowsTogglesTableBackground);
 }
 
 .tr td {
-  *border: 1px solid var(--secondary);
   padding: 15px;
   margin: auto;
 }
@@ -30,11 +20,9 @@
 .action{
   display: flex;
   flex-direction: row;
-  *height: 100%;
 }
 
 .containerButton{
-  *height: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -56,31 +44,4 @@
   color: var(--font_color_1);
   background: var(--primary);
   transition: all 0.3s ease-in;
-}
-
-.tooltip {
-  *position: calc(100%+10);
-  *float: inline-start;
-  *height: 0px;
-  *top: 40px;
-  *right: 25px;
-  *display: none;
-  *z-index: -1;
-  *opacity: 0;
-  *visibility: hidden;
-  background: var(--quaternary);
-  color: var(--font_color_2);
-  font-size: 15px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px var(--box_shadow_1);
-}
-
-.button:hover ~ .tooltip {
-  *z-index: 2;
-  *visibility: visible;
-  *opacity: 1;
-  *top: 201px;
-  *display: block;
-  transition: all 0.4s ease;
 }

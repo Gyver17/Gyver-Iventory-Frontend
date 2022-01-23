@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import styles from "./style.module.css"
 
-const Search = (props) => {
-    const onSearch = props.onSearch
+const Search = ({ onSearch }) => {
     const [search, setSearch] = useState("");
 
     const onInputChange = value => {
@@ -12,13 +11,13 @@ const Search = (props) => {
     return (
         <div className={styles.container}>
             <input
-            type="text"
-            className={styles.input}
-            placeholder="Buscar"
-            value={search}
-            onChange={e => onInputChange(e.target.value)}
-        />
-        <div className={styles.icon}><i id={styles.iconSearch} className="icon iconmagnifier"/></div>
+                type="text"
+                className={styles.input}
+                placeholder="Buscar"
+                value={search}
+                onChange={e => onInputChange(e.target.value)}
+            />
+            <div className={styles.icon}><i id={styles.iconSearch} className="icon iconmagnifier" /></div>
         </div>
     );
 }

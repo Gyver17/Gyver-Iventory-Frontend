@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
 import styles from "./style.module.css"
 
-const Pagination = (props) => {
-    const total = props.total
-    const itemsPerPage = props.itemsPerPage
-    const currentPage = props.currentPage
-    const onPageChange = props.onClick
-    const around = props.around
+const Pagination = ({total, itemsPerPage, currentPage, onClick, around}) => {
 
+    const onPageChange = onClick
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
@@ -40,7 +36,7 @@ const Pagination = (props) => {
     }, [totalPages, currentPage, onPageChange, around]);
 
     if (totalPages === 0) return null;
-
+    
     return (
         <div className={styles.container}>
 
