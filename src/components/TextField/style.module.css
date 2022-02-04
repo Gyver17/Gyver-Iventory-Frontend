@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--font_color_2)
+}
+
+.textField {
+    background: var(--secondary);
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    width: 300px;
+    height: 40px;
+}
+
+.textField span {
+    width: 45px;
+    color: var(--font_color_1);
+    font-size: 25px;
+    text-align: center;
+    margin: auto 0;
+}
+
+.textField input {
+    width: 100%;
+    font-style: italic;
+    outline: none;
+    border: 1px solid var(--secondary);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0px 5px;
+    background: var(--cardBackground)
+}

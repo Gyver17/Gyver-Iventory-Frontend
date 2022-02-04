@@ -1,0 +1,46 @@
+.container {
+  display: block;
+  *flex-direction: column;
+  *height: 100%;
+  *overflow-y: auto;
+}
+
+.title {
+  *position: sticky;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--font_color_2)
+}
+
+.inputs {
+  height: 90%;
+  overflow-y: auto;
+}
+
+.inputs::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.inputs::-webkit-scrollbar:vertical {
+  width: 8px;
+  display: none;
+}
+
+.inputs::-webkit-scrollbar-button:increment,
+.inputs::-webkit-scrollbar-button {
+  display: none;
+}
+
+.inputs::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+.inputs::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarBackground);
+  border-radius: 20px;
+  border: 2px solid var(--scrollbarBorder);
+}
+
+.inputs::-webkit-scrollbar-track {
+  border-radius: 10px;
+}

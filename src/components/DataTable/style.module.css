@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 10px;
   height: 100%;
   width: 100%;
@@ -19,39 +20,42 @@
   color: var(--secondary);
 }
 
-.table {
-  border-collapse: collapse;
+.containerTable {
   display: block;
-  margin: auto;
   max-height: 50vh;
   width: 100%;
   overflow-y: auto;
 }
 
-.table::-webkit-scrollbar {
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.containerTable::-webkit-scrollbar {
   -webkit-appearance: none;
 }
 
-.table::-webkit-scrollbar:vertical {
+.containerTable::-webkit-scrollbar:vertical {
   width: 8px;
 }
 
-.table::-webkit-scrollbar-button:increment,
-.table::-webkit-scrollbar-button {
+.containerTable::-webkit-scrollbar-button:increment,
+.containerTable::-webkit-scrollbar-button {
   display: none;
 }
 
-.table::-webkit-scrollbar:horizontal {
+.containerTable::-webkit-scrollbar:horizontal {
   height: 8px;
 }
 
-.table::-webkit-scrollbar-thumb {
+.containerTable::-webkit-scrollbar-thumb {
   background-color: var(--scrollbarBackground);
   border-radius: 20px;
   border: 2px solid var(--scrollbarBorder);
 }
 
-.table::-webkit-scrollbar-track {
+.containerTable::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
@@ -91,7 +95,7 @@
     font-size: 22px;
   }
 
-  .table {
+  .containerTable {
     max-height: 45vh;
   }
 }
@@ -104,26 +108,25 @@
 }
 
 @media screen and (min-height: 650px) {
-  .table {
+  .containerTable {
     max-height: 60vh;
   }
 }
 
 @media screen and (min-height: 800px) {
-  .table {
+  .containerTable {
     max-height: 65vh;
   }
 }
 
 @media screen and (min-height: 900px) {
-  .table {
+  .containerTable {
     max-height: 70vh;
   }
 }
 
 @media screen and (min-height: 1100px) {
-  .table {
+  .containerTable {
     max-height: 75vh;
   }
 }
-

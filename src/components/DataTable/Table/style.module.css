@@ -3,29 +3,30 @@
   overflow: auto;
 }
 
-.tr {
+.row {
   background: var(rowsTableBackground);
   padding: 5px;
 }
 
-.tr:nth-child(even){
+.row:nth-child(even) {
   background: var(--rowsTogglesTableBackground);
 }
 
-.tr td {
-  padding: 15px;
-  margin: auto;
+.row td {
+  padding: 10px;
+  text-align: center;
 }
 
-.action{
+.action {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
-.containerButton{
-  margin: auto;
-  display: flex;
-  flex-direction: column;
+.containerButton {
+  *margin: auto;
+  *display: flex;
+  *flex-direction: column;
 }
 
 .button {
