@@ -22,6 +22,26 @@ const Table = ({data, header, action, formatDecimal, moneySymbol}) => {
         }
     }
 
+    const types = (column, row) => {
+        if(column.type==="money"){
+            return moneySymbol + format(row[column.field])
+        }
+        if(column.type==="numeric"){
+            return format(row[column.field])
+        }
+        if(column.type==="rol"){
+            if(row[column.field]==="admin"){
+                return "Administrador"
+            }
+            if(row[column.field]==="user"){
+                return "Usuario"
+            }
+        }
+        else{
+            return row[column.field]
+        }
+    }
+
     return (
         <tbody className={styles.container}>
             {data.map((dt, index) => (
@@ -29,11 +49,7 @@ const Table = ({data, header, action, formatDecimal, moneySymbol}) => {
                     {
                         header.map(h => (
                             <td>{
-                                h.type === "money" ?
-                                    moneySymbol + format(dt[h.field]) :
-                                    h.type === "numeric" ?
-                                        format(dt[h.field]) :
-                                        dt[h.field]
+                                types(h, dt)
                             }</td>
                         ))
                     }
@@ -43,11 +59,9 @@ const Table = ({data, header, action, formatDecimal, moneySymbol}) => {
                             <div className={styles.action}>
                                 {
                                     action.map(a => (
-                                        <div className={styles.containerButton}>
                                             <button className={styles.button} onClick={e => a.onClick(dt)}>
-                                                <i className={a.icon} />
+                                                <span className={a.icon} />
                                             </button>
-                                        </div>
                                     ))
                                 }
                             </div>

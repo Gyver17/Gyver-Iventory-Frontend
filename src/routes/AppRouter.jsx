@@ -77,7 +77,7 @@ const AppRouter = () => {
         
       </Routes>
     </Router>
-    {sessionExpired && <SessionExpired />}
+    {sessionExpired && <SessionExpired serverError={false}/>}
     </>
   )
 }

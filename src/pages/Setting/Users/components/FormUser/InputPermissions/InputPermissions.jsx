@@ -1,191 +1,193 @@
+/* ------ Imports ------ */
 import React from "react";
 import ToggleButton from "../../../../../../components/ToggleButton/ToggleButton";
 import styles from "./style.module.css";
 
-const InputPermissions = () => {
+/* ------ Component ------ */
+const InputPermissions = ({control}) => {
     return (
         <div className={styles.container}>
             <label className={styles.title}>Permisos</label>
             <div className={styles.inputs}>
                 <ToggleButton
                     name='permissions.products'
-                    type='checkbox'
                     title='Apartado de Productos'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.products_create'
-                    type='checkbox'
                     title='Crear Nuevos Productos'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.products_update'
-                    type='checkbox'
                     title='Modificar Productos'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.products_delete'
-                    type='checkbox'
                     title='Eliminar Productos'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.category'
-                    type='checkbox'
                     title='Apartado de Categoria'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.category_create'
-                    type='checkbox'
                     title='Crear Nuevas Categorias'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.category_update'
-                    type='checkbox'
                     title='Modificar Categorias'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.category_delete'
-                    type='checkbox'
                     title='Eliminar Categorias'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.services'
-                    type='checkbox'
                     title='Apartado de Servicios'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.services_create'
-                    type='checkbox'
                     title='Crear Nuevos Servicios'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.services_update'
-                    type='checkbox'
                     title='Modificar Servicios'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.services_delete'
-                    type='checkbox'
                     title='Eliminar Servicios'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.client'
-                    type='checkbox'
                     title='Apartado de Cliente'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.client_create'
-                    type='checkbox'
                     title='Crear Nuevos Clientes'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.client_update'
-                    type='checkbox'
                     title='Modificar Clientes'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.client_delete'
-                    type='checkbox'
                     title='Eliminar Clientes'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.supplier'
-                    type='checkbox'
                     title='Apartado de Proveedores'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.supplier_create'
-                    type='checkbox'
                     title='Crear Nuevos Proveedores'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.supplier_update'
-                    type='checkbox'
                     title='Modificar Proveedores'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.supplier_delete'
-                    type='checkbox'
                     title='Eliminar Proveedores'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.employee'
-                    type='checkbox'
                     title='Apartado de Empleados'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.employee_create'
-                    type='checkbox'
                     title='Crear Nuevos Empleados'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.employee_update'
-                    type='checkbox'
                     title='Modificar Empleados'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.employee_delete'
-                    type='checkbox'
                     title='Eliminar Empleados'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.buy'
-                    type='checkbox'
                     title='Apartado de Compras'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.buy_return'
-                    type='checkbox'
                     title='Apartado de Devoluciones de Compras'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.buy_pay'
-                    type='checkbox'
                     title='Apartado de Compras por Pagar'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.sell'
-                    type='checkbox'
                     title='Apartado de Ventas'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.sell_return'
-                    type='checkbox'
                     title='Apartado de Devoluciones de Ventas'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.sell_pay'
-                    type='checkbox'
                     title='Apartado de Ventas por Cobrar'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.consult_product'
-                    type='checkbox'
                     title='Apartado de Consultar por Producto'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.consult_invoice'
-                    type='checkbox'
                     title='Apartado de Consultar por Factura'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.consult_movement'
-                    type='checkbox'
                     title='Apartado de Consulta por Movimientos'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.consult_supplier'
-                    type='checkbox'
                     title='Apartado de Consulta por Proveedore'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.consult_client'
-                    type='checkbox'
                     title='Apartado de Consulta por Cliente'
+                    control={control}
                 />
                 <ToggleButton
                     name='permissions.setting'
-                    type='checkbox'
                     title='Apartado de Configuración'
+                    control={control}
                 />
             </div>
         </div>

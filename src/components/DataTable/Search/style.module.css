@@ -1,104 +1,39 @@
 .container {
+  background: var(--secondary);
   display: flex;
   flex-direction: row;
-  align-items: center;
-  border: 3px solid var(--tertiary);
-  border-right: 0px;
+  border: 1px solid var(--secondary);
   border-radius: 5px;
-  height: 45px;
-}
-
-.input {
-  padding: 0px 5px;
+  width: 300px;
   height: 40px;
-  font-size: 17px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
 }
 
-.icon {
-  height: 45px;
+.container span {
   width: 45px;
-  display: flex;
-  border-left: 2px solid var(--tertiary);
-  background: var(--tertiary);
+  color: var(--font_color_1);
+  font-size: 25px;
+  text-align: center;
+  margin: auto 0;
 }
 
-#iconSearch {
-  margin: 7px 15px 0px 5px;
-  font-size: 30px;
-  color: var(--quaternary);
+.container input {
+  width: 100%;
+  font-style: italic;
+  outline: none;
+  border: 1px solid var(--secondary);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 0px 5px;
+  background: var(--cardBackground);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 800px) {
   .container {
+    width: 250px;
     height: 35px;
   }
 
-  .input {
-    height: 30px;
-    font-size: 15px;
-  }
-
-  .icon {
-    height: 35px;
-    width: 35px;
-  }
-
-  #iconSearch {
-    margin: 4px 15px 0px 3px;
-    font-size: 28px;
-  }
-}
-
-@media screen and (max-width: 1050px) {
-  .container {
-    height: 32px;
-  }
-
-  .input {
-    height: 25px;
-    font-size: 13px;
-  }
-
-  .icon {
-    height: 32px;
-    width: 32px;
-  }
-
-  #iconSearch {
-    margin: 4px 15px 0px 3px;
-    font-size: 23px;
-  }
-}
-
-@media screen and (max-width: 950px) {
-  .container {
-    border: 3px solid var(--tertiary);
-    border-right: 3px;
-    padding: 0px;
-    height: 28px;
-  }
-  
-  .input {
-    height: 20px;
-    font-size: 13px;
-  }
-  
-  .icon {
-    height: 28px;
-    width: 28px;
-  }
-  
-  #iconSearch {
-    margin: 4px 15px 0px 4px;
-    font-size: 20px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .input {
-    font-size: 11px;
+  .container span {
+    width: 40px;
   }
 }

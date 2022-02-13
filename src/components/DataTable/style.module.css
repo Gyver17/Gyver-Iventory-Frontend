@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
+  border-radius: 10px;
   height: 100%;
   width: 100%;
   background: var(--cardBackground);
@@ -17,7 +18,7 @@
 
 .title {
   font-size: 35px;
-  color: var(--secondary);
+  color: var(--font_color_2);
 }
 
 .containerTable {
@@ -66,35 +67,7 @@
   }
 }
 
-@media screen and (max-width: 1050px) {
-  .container {
-    padding: 5px;
-  }
-
-  .title {
-    font-size: 25px;
-  }
-}
-
-@media screen and (max-width: 1050px) {
-  .container {
-    padding: 5px;
-  }
-
-  .title {
-    font-size: 25px;
-  }
-}
-
 @media screen and (max-width: 950px) {
-  .container {
-    padding: 5px;
-  }
-
-  .title {
-    font-size: 22px;
-  }
-
   .containerTable {
     max-height: 45vh;
   }

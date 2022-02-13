@@ -29,7 +29,6 @@ const Header = ({ options, buttons, selectValue }) => {
                                     <button className={styles.button} onClick={button.onClick}>
                                         <i className={button.icon} />
                                     </button>
-                                    {/* <div className={styles.tooltip}>{button.tooltip}</div> */}
                                 </div>
                             ))
                         }

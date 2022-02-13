@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -7,7 +7,7 @@
 .title {
     font-size: 18px;
     font-weight: bold;
-    color: var(--font_color_2)
+    color: var(--font_color_2);
 }
 
 .textField {
@@ -36,5 +36,20 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 0px 5px;
-    background: var(--cardBackground)
+    background: var(--cardBackground);
+}
+
+@media screen and (max-width: 1024px) {
+    .title {
+        font-size: 16px;
+    }
+
+    .textField {
+        width: 250px;
+        height: 35px;
+    }
+
+    .textField span {
+        width: 40px;
+    }
 }

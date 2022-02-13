@@ -14,7 +14,7 @@ const column = [
     {
         title: "Rol",
         field: "rol",
-        type: "string",
+        type: "rol",
         sortable: true,
     }
 ]

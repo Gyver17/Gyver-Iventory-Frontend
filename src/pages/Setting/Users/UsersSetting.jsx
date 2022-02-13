@@ -1,24 +1,46 @@
+/* ------ Library Import ------ */
 import React, { useContext, useState } from "react";
-import { useQuery } from "react-query";
-import DataTable from "../../../components/DataTable/DataTable";
-import { getUsers } from "../../../api/users";
-import { AuthContext } from "../../../context/authProvider";
-import styles from "./style.module.css";
-import { types } from "../../../context/authReducer";
-import FormUser from "./components/FormUser/FormUser";
-import { column, searchData } from "./const/datatableProps";
+import { useQuery, useQueryClient } from "react-query";
 
+/* ------ Components Import ------ */
+import DataTable from "../../../components/DataTable/DataTable";
+import ToasterMessage, {toast} from "../../../components/ToasterMessage/ToasterMessage"
+import PageLoading from "../../../components/PageLoading/PageLoading"
+import FormUser from "./components/FormUser/FormUser";
+import FormPassword from "./components/FormPassword/FormPassword"
+import SessionExpired from "../../../components/SessionExpired/SessionExpired";
+
+/* ------ Import to Component ------ */
+import { getUsers } from "../../../api/users";
+import styles from "./style.module.css";
+import { AuthContext } from "../../../context/authProvider";
+import { types } from "../../../context/authReducer";
+import { column, searchData } from "./const/datatableProps";
+import {requestDelete} from "./hooks/request"
+
+/* ------ Component ------ */
 const UsersSetting = () => {
+    // Global State
     const [state, dispatch] = useContext(AuthContext);
     const { user } = state;
 
+    // Component State
     const [userForm, setUserForm] = useState({ isOpen: false, title: "" });
-    const [updateForm, setUpdateForm] = useState(false);
+    const [updateForm, setUpdateForm] = useState({isUpdate: false, row: undefined});
+    const [formPassword, setFormPassword] = useState({isOpen: false, id: ""})
 
-    const { data, isSuccess } = useQuery(["getUsers", user.token], async () => {
+    // Props DataTable
+    const { data, isSuccess, isError } = useQuery(["getUsers", user], async () => {
         const { queryData, success } = await getUsers(user.token);
         if (success) {
-            return queryData;
+            const filterData = queryData.filter(data =>{
+                if(data.id!==user.id){
+                    return true
+                } else {
+                    return false
+                }
+            })
+            return filterData;
         } else {
             const { code } = queryData;
             if (code === "50115" || code === "43292" || code === "43178") {
@@ -30,33 +52,44 @@ const UsersSetting = () => {
         }
     });
 
-    const openForm = (isOpen, title, update) => {
+    const queryClient = useQueryClient()
+
+    if(isError){
+        return (<SessionExpired serverError={true} />)
+    }
+
+    const openForm = (isOpen, title, isUpdate, row) => {
             setUserForm({ isOpen, title });
-            setUpdateForm(update);
+            setUpdateForm({isUpdate, row});
         }
 
     const button = [
         {
             icon: "icon iconplus",
-            onClick: () => openForm(true, "Crear Nuevo Usuario", true),
+            onClick: () => openForm(true, "Crear Nuevo Usuario", false),
         },
     ];
 
     const action = [
         {
             icon: "icon icondocument-edit1",
-            onClick: (row) => console.log(row),
+            onClick: (row) => openForm(true, "Modificar Usuario", true, row),
+        },
+        {
+            icon: "icon iconlock-open3",
+            onClick: (row) => setFormPassword({isOpen: true, id: row.id}),
         },
         {
             icon: "icon icontrash-can3",
-            onClick: (row) => console.log(row),
+            onClick: async (row) => await requestDelete(row.id, user.token, dispatch, toast, queryClient),
         },
     ];
 
     return (
         <>
+            <ToasterMessage />
             <div className={styles.container}>
-                {isSuccess && (
+                {isSuccess ? (
                     <DataTable
                         title='Usuarios'
                         numberOfEntries={[5, 10, 15, 20]}
@@ -64,17 +97,24 @@ const UsersSetting = () => {
                         headerButtons={button}
                         header={column}
                         data={data}
-                        formatDecimal='0,000.00'
-                        moneySymbol='$'
+                        // formatDecimal='0,000.00'
+                        // moneySymbol='$'
                         aroundCurrentPage={5}
                         action={action}
                     />
-                )}
+                ) : <PageLoading />}
             </div>
             <FormUser
                 userForm={userForm}
                 setUserForm={setUserForm}
                 update={updateForm}
+                queryClient={queryClient}
+            />
+            <FormPassword 
+                passwordForm={formPassword}
+                setPasswordForm={setFormPassword}
+                title="Modificar Contraseña"
+                queryClient={queryClient}
             />
         </>
     );

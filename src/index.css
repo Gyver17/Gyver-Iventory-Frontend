@@ -23,7 +23,8 @@
   --box_shadow_2: rgba(105, 21, 36, 0.9);
   --box_shadow_3: rgba(0, 0, 0, 0.5);
   --font_color_1: white;
-  --font_color_2: #14539a;
+  /*--font_color_2: #14539a;*/
+  --font_color_2: #032950;
 }
 
 .App {

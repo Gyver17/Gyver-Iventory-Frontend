@@ -1,0 +1,27 @@
+.button {
+  height: 35px;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  background: none;
+  border: 0px;
+  background: var(--secondary);
+  border-radius: 5px;
+  width: 180px;
+  color: var(--font_color_1);
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--primary);
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 750px) {
+  .button {
+    width: 120px;
+    height: 30px;
+    font-size: 15px;
+  }
+}

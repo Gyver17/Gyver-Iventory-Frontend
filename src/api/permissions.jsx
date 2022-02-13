@@ -1,8 +1,8 @@
 import { url } from "../const/url";
 
-const getUsers = async (token) => {
+const getPermissionsByIdUser = async (id, token) => {
     try {
-        const request = await fetch(url + "users", {
+        const request = await fetch(url + "permissions/"+id, {
             method: "GET",
             mode: "cors",
             credentials: "include",
@@ -22,9 +22,9 @@ const getUsers = async (token) => {
     }
 };
 
-const createUser = async (token, body) => {
+const createPermissions = async (token, body) => {
     try {
-        const request = await fetch(url + "users", {
+        const request = await fetch(url + "permissions", {
             method: "POST",
             mode: "cors",
             credentials: "include",
@@ -45,9 +45,9 @@ const createUser = async (token, body) => {
     }
 };
 
-const updateUser = async (id, token, body) => {
+const updatePermissions = async (id, token, body) => {
     try {
-        const request = await fetch(url + "users/updateUser/"+id, {
+        const request = await fetch(url + "permissions/"+id, {
             method: "PUT",
             mode: "cors",
             credentials: "include",
@@ -68,32 +68,9 @@ const updateUser = async (id, token, body) => {
     }
 };
 
-const updatePassword = async (id, token, body) => {
+const deletePermissions = async (id, token) => {
     try {
-        const request = await fetch(url + "users/updatePassword/"+id, {
-            method: "PUT",
-            mode: "cors",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "x-access-token": token,
-            },
-            body: JSON.stringify(body),
-        });
-        const queryData = await request.json();
-        if (request.ok) {
-            return { queryData, success: true };
-        } else {
-            return { queryData, success: false };
-        }
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-const deleteUser = async (id, token) => {
-    try {
-        const request = await fetch(url + "users/"+id, {
+        const request = await fetch(url + "permissions/"+id, {
             method: "DELETE",
             mode: "cors",
             credentials: "include",
@@ -113,4 +90,4 @@ const deleteUser = async (id, token) => {
     }
 };
 
-export { getUsers, createUser, updateUser, updatePassword, deleteUser };
+export { getPermissionsByIdUser, createPermissions, updatePermissions, deletePermissions };

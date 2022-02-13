@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/authProvider";
 import { types } from "../../context/authReducer";
 
 
-const SessionExpired = () => {
+const SessionExpired = ({serverError}) => {
 
     const [, dispatch] = useContext(AuthContext)
 
@@ -21,7 +21,7 @@ const SessionExpired = () => {
         <div className={styles.overlay}>
             <div className={styles.container}>
                 <div className={styles.body}>
-                    <h3>La Sección a Expirado, por favor vuelva a iniciar sessión</h3>
+                    <h3>{serverError ? "Ha ocurrido un fallo en el servidor" : "La Sección a Expirado, por favor vuelva a iniciar sessión"}</h3>
                 </div>
                 <button className={styles.button} onClick={handleSubmit}>
                     Aceptar

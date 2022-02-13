@@ -1,15 +1,12 @@
 .container {
   display: block;
-  *flex-direction: column;
-  *height: 100%;
-  *overflow-y: auto;
+  padding: 0px 10px;
 }
 
 .title {
-  *position: sticky;
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--font_color_2)
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--font_color_2);
 }
 
 .inputs {
@@ -44,3 +41,10 @@
 .inputs::-webkit-scrollbar-track {
   border-radius: 10px;
 }
+
+@media screen and (max-width: 750px) {
+  .container {
+    height: 50%;
+  }
+}
+

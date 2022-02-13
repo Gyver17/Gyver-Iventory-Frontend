@@ -15,18 +15,15 @@
 .row td {
   padding: 10px;
   text-align: center;
+  color: #050505;
+  font-style: italic;
+  font-size: 18px;
 }
 
 .action {
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-
-.containerButton {
-  *margin: auto;
-  *display: flex;
-  *flex-direction: column;
 }
 
 .button {

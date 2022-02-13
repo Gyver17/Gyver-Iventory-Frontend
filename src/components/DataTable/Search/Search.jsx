@@ -12,12 +12,13 @@ const Search = ({ onSearch }) => {
         <div className={styles.container}>
             <input
                 type="text"
-                className={styles.input}
+                // className={styles.input}
                 placeholder="Buscar"
                 value={search}
                 onChange={e => onInputChange(e.target.value)}
             />
-            <div className={styles.icon}><i id={styles.iconSearch} className="icon iconmagnifier" /></div>
+            {/*<div className={styles.icon}><i id={styles.iconSearch} className="icon iconmagnifier" /></div>*/}
+            <span className="icon iconmagnifier" />
         </div>
     );
 }
