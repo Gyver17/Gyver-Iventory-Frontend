@@ -2,11 +2,11 @@ import { url } from "../const/url";
 
 const login = async (user) => {
     try {
-        console.log(url+"log")
         const request = await fetch(url + "log", {
             method: "POST",
             mode: "cors",
             credentials: "include",
+            withCredentials: true,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
         });
