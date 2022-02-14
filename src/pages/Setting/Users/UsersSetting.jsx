@@ -34,10 +34,10 @@ const UsersSetting = () => {
         const { queryData, success } = await getUsers(user.token);
         if (success) {
             const filterData = queryData.filter(data =>{
-                if(data.id!==user.id){
-                    return true
-                } else {
+                if(data.mail === user.mail || data.mail === process.env.REACT_APP_EMAIL){
                     return false
+                } else {
+                    return true
                 }
             })
             return filterData;

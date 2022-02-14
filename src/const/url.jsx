@@ -1,4 +1,3 @@
-const url = "http://localhost:3000/";
-//const url = 'http://192.168.0.111:3000/'
+const url = process.env.REACT_APP_URL
 
 module.exports = { url };
