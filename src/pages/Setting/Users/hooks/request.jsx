@@ -10,22 +10,9 @@ import {
 	updatePermissions,
 	deletePermissions,
 } from "../../../../api/permissions";
-import { types } from "../../../../context/authReducer";
+import requestRejected from "../../../../helpers/requestRejected";
 
 /* ------ Helpers ------ */
-const requestRejected = (code, dispatch, toast) => {
-	if (code === "50115" || code === "43292" || code === "43178") {
-		dispatch({
-			type: types.sessionClose,
-		});
-	}
-
-	// This Situation Should Not Happen
-	if (code === "43097") {
-		toast.error("Valores Invalido");
-	}
-};
-
 const constraintViolated = (code, toast) => {
 	if (code === "22121") {
 		toast.error("El Correo Electrónico Ya Esta Registrado");
@@ -62,7 +49,7 @@ const requestCreate = async (token, body, dispatch, toast, queryClient) => {
 		}
 	} else {
 		const { code } = reqUser.queryData;
-		requestRejected(code, dispatch, types);
+		requestRejected(code, dispatch, toast);
 		constraintViolated(code, toast);
 		return false
 	}
@@ -87,7 +74,7 @@ const requestUpdate = async (id, token, body, dispatch, toast, queryClient) => {
 		}
 	} else {
 		const { code } = reqUser.queryData;
-		requestRejected(code, dispatch, types);
+		requestRejected(code, dispatch, toast);
 		constraintViolated(code, toast);
 		return false
 	}
@@ -102,7 +89,7 @@ const requestUpdatePassword = async (id, token, body, dispatch, toast, queryClie
 		return true
 	} else {
 		const { code } = reqUser.queryData;
-		requestRejected(code, dispatch, types);
+		requestRejected(code, dispatch, toast);
 		return false
 	}
 };
