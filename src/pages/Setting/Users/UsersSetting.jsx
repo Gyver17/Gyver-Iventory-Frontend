@@ -97,8 +97,6 @@ const UsersSetting = () => {
                         headerButtons={button}
                         header={column}
                         data={data}
-                        // formatDecimal='0,000.00'
-                        // moneySymbol='$'
                         aroundCurrentPage={5}
                         action={action}
                     />

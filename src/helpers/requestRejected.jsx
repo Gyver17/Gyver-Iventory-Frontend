@@ -1,7 +1,7 @@
 import { types } from "../context/authReducer";
 
 const requestRejected = (code, dispatch, toast) => {
-	if (code === "50115" || code === "43292" || code === "43178") {
+	if (code === "50115" || code === "43292" || code === "43178" || code === "43114") {
 		dispatch({
 			type: types.sessionClose,
 		});

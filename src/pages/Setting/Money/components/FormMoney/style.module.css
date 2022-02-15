@@ -1,0 +1,29 @@
+.container {
+  height: 80vh;
+  width: 75vw;
+  margin: 5px;
+  display: flex;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 10px 0px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
