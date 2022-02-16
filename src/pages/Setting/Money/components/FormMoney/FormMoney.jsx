@@ -83,7 +83,7 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 								control={control}
 								title='Nombre'
 								placeholder='Escribir Nombre'
-								icon='icon iconprofile1'
+								icon='icon iconcoins'
 							/>
 							{errors.name?.message && (
 								<ErrorMessage message={errors.name.message} />
@@ -94,7 +94,7 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 								control={control}
 								title='Symbolo'
 								placeholder='Escribir Un Symbolo'
-								icon='icon iconprofile1'
+								icon='icon icondollar1'
 							/>
 							{errors.symbol?.message && (
 								<ErrorMessage message={errors.symbol.message} />
@@ -105,7 +105,7 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 								control={control}
 								title='Valor'
 								placeholder='Escribir Un Valor'
-								icon='icon iconprofile1'
+								icon='icon iconcalculator1'
 							/>
 							{errors.value?.message && (
 								<ErrorMessage message={errors.value.message} />
