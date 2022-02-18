@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--font_color_2);
+}
+
+.inputs {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 300px;
+	padding: 5px;
+}
+
+.inputs input {
+	width: 200px;
+    font-style: italic;
+    outline: none;
+    border: 2px solid var(--secondary);
+    border-radius: 5px;
+    padding: 0px 5px;
+    background: var(--cardBackground);
+}
