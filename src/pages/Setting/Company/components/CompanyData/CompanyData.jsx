@@ -1,6 +1,8 @@
 import React from "react";
 import TextField from "../../../../../components/TextField/TextField";
 import SelectAndTextField from "../../../../../components/SelectAndTextField/SelectAndTextField";
+import ButtonForm from "../../../../../components/ButtonForm/ButtonForm";
+import styles from "./style.module.css"
 
 const CompanyData = ({control}) => {
 	const phoneOptions = [
@@ -18,7 +20,8 @@ const CompanyData = ({control}) => {
 			];
 
 	return (
-		<>
+		<div className={styles.container}>
+			<span className={styles.title}>Datos de la Compañia</span>
 			<TextField
 				name='name'
 				type='text'
@@ -59,7 +62,10 @@ const CompanyData = ({control}) => {
 				placeholder='Escribir El Numero de Telefono'
 				width="85px"
 			/>
-		</>
+			<div className={styles.button}>
+            	<ButtonForm title="Guardar" />
+            </div>
+		</div>
 	);
 };
 

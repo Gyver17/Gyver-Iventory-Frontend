@@ -12,6 +12,7 @@ const customStyles = {
     display: "flex",
     flexDirection: "row",
     borderRadius: "5px",
+    margin: "5px 10px",
   }),
   menu: (provided, state) => ({
     ...provided,

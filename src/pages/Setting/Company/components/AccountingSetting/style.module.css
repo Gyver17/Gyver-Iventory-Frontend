@@ -1,0 +1,46 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  overflow: auto;
+}
+
+.title {
+  grid-column: 1 / 3;
+  color: var(--font_color_2);
+  font-size: 25px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.button {
+  grid-column: 1 / 3;
+  justify-content: flex-end;
+}
+.container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.container::-webkit-scrollbar:vertical {
+  width: 8px;
+  display: block;
+}
+
+.container::-webkit-scrollbar-button:increment,
+.container::-webkit-scrollbar-button {
+  display: none;
+}
+
+.container::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarBackground);
+  border-radius: 20px;
+  border: 2px solid var(--scrollbarBorder);
+}
+
+.container::-webkit-scrollbar-track {
+  border-radius: 10px;
+}

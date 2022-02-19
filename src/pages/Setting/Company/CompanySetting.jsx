@@ -23,6 +23,7 @@ const CompanySetting = () => {
             />
             <div className={styles.body}>
                 <CompanyData control={control}/>
+                <i className={styles.separator} />
                 <AccountingSetting control={control} setSelectValue={setValue}/>
             </div>
         </div>

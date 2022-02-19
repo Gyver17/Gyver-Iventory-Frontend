@@ -1,7 +1,8 @@
 import React from 'react'
 import SelectAndTextField from "../../../../../components/SelectAndTextField/SelectAndTextField";
 import SelectField from "../../../../../components/SelectField/SelectField";
-
+import ButtonForm from "../../../../../components/ButtonForm/ButtonForm";
+import styles from "./style.module.css"
 
 const AccountingSetting = ({control, setSelectValue}) => {
 	const docOptions = [
@@ -11,7 +12,8 @@ const AccountingSetting = ({control, setSelectValue}) => {
 			];
 
 	return (
-		<>
+		<div className={styles.container}>
+			<span className={styles.title}>Configuraciones Contables</span>
 			<SelectAndTextField
 				name={["rifSelect", "rifText"]}
 				// control={control}
@@ -46,9 +48,11 @@ const AccountingSetting = ({control, setSelectValue}) => {
 	            noOptionsMessage='Rol No Encontrado'
 		        placeholder='Seleccione Un Rol'
             />
+            <div className={styles.button}>
+            	<ButtonForm title="Guardar" />
+            </div>
 
-
-		</>
+		</div>
 	)
 }
 
