@@ -19,6 +19,7 @@ const customStyles = {
     width: (window.innerWidth < 1025) ? "250px" : "300px",
     padding: "0px",
     background: "var(--cardBackground)",
+    margin: "5px 10px",
   }),
   dropdownIndicator: () => ({
     color: "var(--secondary)",

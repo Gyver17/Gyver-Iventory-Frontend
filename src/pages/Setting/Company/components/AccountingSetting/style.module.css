@@ -3,6 +3,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 5px;
   overflow: auto;
+  margin: 5px;
 }
 
 .title {
@@ -13,10 +14,6 @@
   font-style: italic;
 }
 
-.button {
-  grid-column: 1 / 3;
-  justify-content: flex-end;
-}
 .container::-webkit-scrollbar {
   -webkit-appearance: none;
 }
@@ -43,4 +40,17 @@
 
 .container::-webkit-scrollbar-track {
   border-radius: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0px;
+  }
+
+  .title {
+    grid-column: 1 / 2;
+    font-size: 22px;
+  }
 }

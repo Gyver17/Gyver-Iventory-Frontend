@@ -15,15 +15,24 @@
 	flex-direction: row;
 	justify-content: space-around;
 	width: 300px;
+    margin: 0px 5px;
 	padding: 5px;
 }
 
 .inputs input {
-	width: 200px;
+	width: 220px;
+    height: 40px;
     font-style: italic;
     outline: none;
     border: 2px solid var(--secondary);
     border-radius: 5px;
     padding: 0px 5px;
+    margin: 0px 5px;
     background: var(--cardBackground);
+}
+
+@media screen and (max-width: 1024px) {
+    .inputs input {
+        height: 35px;
+    }
 }

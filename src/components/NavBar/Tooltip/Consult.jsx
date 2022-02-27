@@ -8,48 +8,48 @@ const Consult = () => {
             <div className={styles.title_tooltip}>
                 <div className={styles.title}>
                     <i className="icon iconchevron-right"></i>
-                    <div>Consultar</div>
+                    <span>Consultar</span>
                 </div>
                 <label for={styles.show_consult}>
                     <i className="icon iconchevron-right"></i>
-                    <div>Consultar</div>
+                    <span>Consultar</span>
                 </label>
             </div>
             <ul className={styles.list}>
                 <li>
                     <NavLink to='/consult/category' className={styles.link}>
                         <i className="icon iconcabinet"></i>
-                        <div>Por Categorias</div>
+                        <span>Por Categorias</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to='/consult/products' className={styles.link}>
                         <i className="icon iconbox1"></i>
-                        <div>Por Productos</div>
+                        <span>Por Productos</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to='/consult/movements' className={styles.link}>
                         <i className="icon iconstats"></i>
-                        <div>Por Movimientos</div>
+                        <span>Por Movimientos</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to='/consult/invoice' className={styles.link}>
                         <i className="icon icondocument-table1"></i>
-                        <div>Por Facturas</div>
+                        <span>Por Facturas</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to='/consult/supplier' className={styles.link}>
                         <i className="icon iconrecent_actors"></i>
-                        <div>Por Proveedores</div>
+                        <span>Por Proveedores</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to='/consult/client' className={styles.link}>
                         <i className="icon iconaddressbook"></i>
-                        <div>Por Clientes</div>
+                        <span>Por Clientes</span>
                     </NavLink>
                 </li>
             </ul>

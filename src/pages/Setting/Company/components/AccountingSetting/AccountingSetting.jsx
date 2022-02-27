@@ -1,7 +1,6 @@
 import React from 'react'
 import SelectAndTextField from "../../../../../components/SelectAndTextField/SelectAndTextField";
 import SelectField from "../../../../../components/SelectField/SelectField";
-import ButtonForm from "../../../../../components/ButtonForm/ButtonForm";
 import styles from "./style.module.css"
 
 const AccountingSetting = ({control, setSelectValue}) => {
@@ -20,6 +19,7 @@ const AccountingSetting = ({control, setSelectValue}) => {
 				options={docOptions}
 				title='Divisa Principal'
 				placeholder='Valor'
+				selectPlaceholder = 'X'
 				width="65px"
 			/>
 			<SelectAndTextField
@@ -28,6 +28,7 @@ const AccountingSetting = ({control, setSelectValue}) => {
 				options={docOptions}
 				title='Divisa Secundaria'
 				placeholder='Valor'
+				selectPlaceholder = 'X'
 				width="65px"
 			/>
 			<SelectField
@@ -37,8 +38,8 @@ const AccountingSetting = ({control, setSelectValue}) => {
                 setValue={setSelectValue}
                 title='Formato Numerico'
 	            noOptionsMessage='Rol No Encontrado'
-		        placeholder='Seleccione Un Rol'
-            />
+		        placeholder='Seleccione Un Formato'
+				selectPlaceholder = 'X'            />
             <SelectField
                 name='user.rol'
                 options={docOptions}
@@ -46,12 +47,8 @@ const AccountingSetting = ({control, setSelectValue}) => {
                 setValue={setSelectValue}
                 title='Cantidad De Decimales'
 	            noOptionsMessage='Rol No Encontrado'
-		        placeholder='Seleccione Un Rol'
+		        placeholder='Seleccione Una Cantidad'
             />
-            <div className={styles.button}>
-            	<ButtonForm title="Guardar" />
-            </div>
-
 		</div>
 	)
 }
