@@ -1,9 +1,10 @@
 import React from "react";
 import TextField from "../../../../../components/TextField/TextField";
 import SelectAndTextField from "../../../../../components/SelectAndTextField/SelectAndTextField";
+import ErrorMessage from "../../../../../components/ErrorMessage/ErrorMessage";
 import styles from "./style.module.css";
 
-const CompanyData = ({ control }) => {
+const CompanyData = ({ control, setSelectValue, errors }) => {
 	const phoneOptions = [
 		{ value: "0412", label: "0412" },
 		{ value: "0414", label: "0414" },
@@ -22,46 +23,60 @@ const CompanyData = ({ control }) => {
 		<div className={styles.container}>
 			<span className={styles.title}>Datos de la Compañia</span>
 			<TextField
-				name='name'
+				name='companyName'
 				type='text'
 				control={control}
 				title='Nombre De La Compañia'
 				placeholder='Escribir El Nombre De La Compañia'
 				icon='icon icondollar1'
 			/>
+			{errors.companyName?.message && (
+				<ErrorMessage message={errors.companyName.message} />
+			)}
 			<TextField
-				name='mail'
+				name='companyMail'
 				type='text'
 				control={control}
 				title='Correo Electrónico De La Compañia'
 				placeholder='Escribir El Correo Electrónico De La Compañia'
 				icon='icon icondollar1'
 			/>
+			{errors.companyMail?.message && (
+				<ErrorMessage message={errors.companyMail.message} />
+			)}
 			<SelectAndTextField
-				name={["rifSelect", "rifText"]}
+				name={["rifSelect", "rifNumber"]}
+				type='number'
 				control={control}
+				setValue={setSelectValue}
 				options={docOptions}
 				title='Rif De La Compañia'
 				placeholder='Escribir El Rif De La Compañia'
-				selectPlaceholder = 'X'
+				selectPlaceholder='X'
 				width='65px'
 			/>
 			<SelectAndTextField
-				name={["rifSelect", "rifText"]}
+				name={["firstPhoneSelect", "firstPhoneNumber"]}
+				type='text'
+				inputmMode='numeric'
 				control={control}
+				setValue={setSelectValue}
 				options={phoneOptions}
 				title='Numero de Telefono'
 				placeholder='Escribir El Numero de Telefono'
-				selectPlaceholder = '04XX'
+				selectPlaceholder='04XX'
 				width='85px'
 			/>
 			<SelectAndTextField
-				name={["rifSelect", "rifText"]}
+				name={["secondPhoneSelect", "secondPhoneNumber"]}
+				type='text'
+				inputmMode='numeric'
 				control={control}
+				setValue={setSelectValue}
 				options={phoneOptions}
 				title='Numero de Telefono'
 				placeholder='Escribir El Numero de Telefono'
-				selectPlaceholder = '04XX'
+				selectPlaceholder='04XX'
 				width='85px'
 			/>
 		</div>

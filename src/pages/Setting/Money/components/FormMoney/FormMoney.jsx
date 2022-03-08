@@ -15,7 +15,7 @@ import ErrorMessage from "../../../../../components/ErrorMessage/ErrorMessage";
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
 import { initialValues, validationSchema } from "../../const/validationSchema";
-import {requestCreate, requestUpdate,} from "../../hooks/request";
+import { createMoney, updateMoney } from "../../../../../api/money";
 import { AuthContext } from "../../../../../context/authProvider";
 
 const FormMoney = ({ form, setForm, update, queryClient }) => {
@@ -31,12 +31,12 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 	const [values, setValues] = useState(initialValues);
 
 	useEffect(() => {
-        if(isUpdate){
-			setValues(row)
+		if (isUpdate) {
+			setValues(row);
 		} else {
-			setValues(initialValues)
-	}
-    }, [setValues, isUpdate, row]);
+			setValues(initialValues);
+		}
+	}, [setValues, isUpdate, row]);
 
 	const {
 		control,
@@ -49,32 +49,45 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 	});
 
 	useEffect(() => {
-        reset(values);
-    }, [values, reset]);
+		reset(values);
+	}, [values, reset]);
 
 	const onSubmit = async (data) => {
-        if (isUpdate) {
-            const id = row.id;
-            const success = await requestUpdate(id, token, data, dispatch, toast, queryClient);
-            if(success){
-                setForm(false);
-            }
-        } else {
-            const success = await requestCreate(token, data, dispatch, toast, queryClient);
-            if(success){
-                reset(values);
-            }
-        }
-    };
+		if (isUpdate) {
+			const id = row.id;
+			const success = await updateMoney(
+				id,
+				token,
+				data,
+				dispatch,
+				toast,
+				queryClient
+			);
+			if (success) {
+				setForm(false);
+			}
+		} else {
+			const success = await createMoney(
+				token,
+				data,
+				dispatch,
+				toast,
+				queryClient
+			);
+			if (success) {
+				reset(values);
+			}
+		}
+	};
 
 	return (
 		<>
 			<ToasterMessage />
 			<Modal isOpen={form.isOpen} setOpen={setForm} title={form.title}>
 				<div>
-					<form 
+					<form
 						className={styles.form}
-                        onSubmit={handleSubmit(onSubmit)}
+						onSubmit={handleSubmit(onSubmit)}
 					>
 						<div className={styles.inputs}>
 							<TextField

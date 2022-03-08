@@ -16,7 +16,7 @@ import styles from "./style.module.css";
 import { AuthContext } from "../../../context/authProvider";
 import { types } from "../../../context/authReducer";
 import { column, searchData } from "./const/datatableProps";
-import {requestDelete} from "./hooks/request"
+import {requestDelete} from "./hooks/nestedRequest"
 
 /* ------ Component ------ */
 const UsersSetting = () => {

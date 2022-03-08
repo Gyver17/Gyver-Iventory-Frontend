@@ -15,7 +15,7 @@ import FormMoney from "./components/FormMoney/FormMoney";
 import styles from "./style.module.css";
 import { AuthContext } from "../../../context/authProvider";
 import { column, searchData } from "./const/datatableProps";
-import { requestGet, requestDelete } from "./hooks/request";
+import { getMoney, deleteMoney } from "../../../api/money";
 
 /* ------ Component ------ */
 const MoneySetting = () => {
@@ -34,7 +34,7 @@ const MoneySetting = () => {
     const { data, isSuccess, isError } = useQuery(
         ["getMoney", user],
         async () => {
-            return await requestGet(user.token, dispatch, toast);
+            return await getMoney(user.token, dispatch, toast);
         }
     );
 
@@ -64,7 +64,7 @@ const MoneySetting = () => {
         {
             icon: "icon icontrash-can3",
             onClick: async (row) =>
-                await requestDelete(
+                await deleteMoney(
                     row.id,
                     user.token,
                     dispatch,

@@ -13,7 +13,7 @@ import ToasterMessage, {toast} from "../../../../../components/ToasterMessage/To
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
 import { initialValues, validationSchema } from "./values";
-import {requestUpdatePassword} from "../../hooks/request";
+import {requestUpdatePassword} from "../../hooks/nestedRequest";
 import { AuthContext } from "../../../../../context/authProvider";
 
 

@@ -13,7 +13,6 @@ const SelectField = ({
 	name,
 	setValue
 }) => {
-
 	const { field } = useController({
         control,
         name,
