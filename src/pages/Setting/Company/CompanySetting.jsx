@@ -1,30 +1,35 @@
 /* ------ Library Import ------ */
 import React, { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+/* ------ Components Import ------ */
 import AccountingSetting from "./components/AccountingSetting/AccountingSetting";
 import CompanyData from "./components/CompanyData/CompanyData";
+import ButtonForm from "../../../components/ButtonForm/ButtonForm";
+import ToasterMessage, { toast } from "../../../components/ToasterMessage/ToasterMessage";
+import PageLoading from "../../../components/PageLoading/PageLoading";
+
+/* ------ Import to Component ------ */
 import {
     initialValues,
     currencyList,
     sendValues,
     validationSchema,
 } from "./const/values";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { getSetting } from "../../../api/setting";
+import { getSetting, updateSetting } from "../../../api/setting";
 import { getMoney } from "../../../api/money";
-import ButtonForm from "../../../components/ButtonForm/ButtonForm";
-import { toast } from "../../../components/ToasterMessage/ToasterMessage";
-import PageLoading from "../../../components/PageLoading/PageLoading";
 import styles from "./style.module.css";
-import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../context/authProvider";
 
+/* ------ Component ------ */
 const CompanySetting = () => {
     // Global State
     const [state, dispatch] = useContext(AuthContext);
-    const { user } = state;
+    const { user, setting } = state
 
     const [values, setValues] = useState({});
+    const [id, setId] = useState()
     const [currencyOptions, setCurrencyOptions] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -32,13 +37,14 @@ const CompanySetting = () => {
         const query = async () => {
             setLoading(false);
             const data = await getSetting(user.token, dispatch, toast);
+            setId(data.id)
             const currency = await getMoney(user.token, dispatch, toast);
             setValues(initialValues(data));
-            setCurrencyOptions(currencyList(currency));
+            setCurrencyOptions(currencyList(currency, setting));
             setLoading(true);
         };
         query();
-    }, [user, dispatch]);
+    }, [user, dispatch, setting]);
 
     const {
         control,
@@ -55,15 +61,20 @@ const CompanySetting = () => {
         reset(values);
     }, [values, reset]);
 
-    const onSubmit = (data) => {
-        const values = sendValues(data);
-        console.log(values);
+
+    const onSubmit = async (data) => {
+        const body = sendValues(data);
+        const request = await updateSetting(id, user.token, body, dispatch, toast)
+        if(request) {
+            reset(initialValues(body))
+        }
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
             {loading ? (
                 <>
+                    <ToasterMessage />
                     <div className={styles.body}>
                         <CompanyData
                             control={control}

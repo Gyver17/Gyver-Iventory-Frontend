@@ -14,7 +14,7 @@ const column = [
     {
         title: "Valor Respecto a Principal",
         field: "value",
-        type: "number",
+        type: "numeric",
         sortable: false,
     },
 ];

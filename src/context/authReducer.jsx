@@ -6,7 +6,9 @@ const types = {
 }
 
 const initialState = {
-    user: JSON.parse(localStorage.getItem("data")) || null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
+    permissions: JSON.parse(localStorage.getItem('permissions')) || null,
+    setting: JSON.parse(localStorage.getItem('setting')) || null,
     sessionExpired: false
 };
 
@@ -16,13 +18,17 @@ const authReducer = (state, action) => {
             const data = action.payload
             return {
                 ...state,
-                user: data,
+                user: data.user,
+                permissions: data.permissions,
+                setting: data.setting
             }
 
         case types.authLogout:
             return {
                 ...state,
                 user: null,
+                permissions: null,
+                setting: null,
             }
 
         case types.sessionClose:
@@ -34,6 +40,8 @@ const authReducer = (state, action) => {
             return {
                 ...state,
                 user: null,
+                permissions: null,
+                setting: null,
                 sessionExpired: false
             }
 

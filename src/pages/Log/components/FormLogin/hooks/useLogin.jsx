@@ -10,7 +10,9 @@ const useLogin = (navigate, dispatch, types) => {
             type: types.authLogin,
             payload: data
         })
-        localStorage.setItem('data', JSON.stringify(data))
+        localStorage.setItem('user', JSON.stringify(data.user))
+        localStorage.setItem('permissions', JSON.stringify(data.permissions))
+        localStorage.setItem('setting', JSON.stringify(data.setting))
     }
 
     const handleLogin = async (user) => {

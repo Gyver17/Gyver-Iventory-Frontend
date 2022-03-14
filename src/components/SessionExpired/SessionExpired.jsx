@@ -1,27 +1,32 @@
-import styles from "./style.module.css"
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./style.module.css";
 import { AuthContext } from "../../context/authProvider";
 import { types } from "../../context/authReducer";
 
-
-const SessionExpired = ({serverError}) => {
-
-    const [, dispatch] = useContext(AuthContext)
+const SessionExpired = ({ serverError }) => {
+    const [, dispatch] = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         try {
             e.preventDefault();
-            dispatch({ type: types.clearSession })
-            localStorage.removeItem('data')
+            localStorage.removeItem("data");
+            dispatch({ type: types.clearSession });
+            navigate("/");
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
     return (
         <div className={styles.overlay}>
             <div className={styles.container}>
                 <div className={styles.body}>
-                    <h3>{serverError ? "Ha ocurrido un fallo en el servidor" : "La Sección a Expirado, por favor vuelva a iniciar sessión"}</h3>
+                    <h3>
+                        {serverError
+                            ? "Ha ocurrido un fallo en el servidor"
+                            : "La Sección a Expirado, por favor vuelva a iniciar sessión"}
+                    </h3>
                 </div>
                 <button className={styles.button} onClick={handleSubmit}>
                     Aceptar

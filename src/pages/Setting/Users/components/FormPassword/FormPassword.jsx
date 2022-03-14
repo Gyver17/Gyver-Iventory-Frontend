@@ -23,7 +23,7 @@ const FormPassword = ({ passwordForm, setPasswordForm, title, queryClient }) => 
 
 	// Global State
     const [state, dispatch] = useContext(AuthContext);
-    const { user } = state;
+    const { user } = state
     const token = user.token;
 
 	const {

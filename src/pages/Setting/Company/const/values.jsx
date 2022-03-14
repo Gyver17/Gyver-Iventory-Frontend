@@ -10,10 +10,6 @@ const initialValues = (values) => {
 		company_rif,
 		id_money_1,
 		id_money_2,
-		first_symbol,
-		first_value,
-		second_symbol,
-		second_value,
 		iva,
 		number_format,
 		qty_decimal,
@@ -32,11 +28,7 @@ const initialValues = (values) => {
 		secondPhoneSelect: secondPhone[0],
 		secondPhoneNumber: secondPhone[1],
 		firstCurrency: id_money_1,
-		// firstCurrency: first_symbol + " - " + first_value,
-		// firstCurrencyNumber: first_value,
 		secondCurrency: id_money_2,
-		// secondCurrency: second_symbol + " - " + second_value,
-		// secondCurrencyNumber: second_value,
 		numberFormat: number_format,
 		decimalQuantity: qty_decimal,
 		porcentIva: iva * 100,
@@ -45,12 +37,26 @@ const initialValues = (values) => {
 	return inputValues;
 };
 
-const currencyList = (currencys) => {
+const currencyList = (currencys, setting) => {
 	const list = [];
+	let format = "";
+	const config = {
+		minimumFractionDigits: setting.qty_decimal,
+	};
+
+	if (setting.number_format === "0.000,00") {
+		format = "en-US";
+	} else {
+		format = "de-DE";
+	}
+
 	currencys.map((currency) =>
 		list.push({
 			value: currency.id,
-			label: `${currency.name}, ${currency.symbol}  ${currency.value}`,
+			label: `${currency.name}, ${currency.symbol}  ${Intl.NumberFormat(
+				format,
+				config
+			).format(currency.value)}`,
 		})
 	);
 	return list;
@@ -69,9 +75,11 @@ const validationSchema = yup.object({
 		.string()
 		.required("Debe seleccionar una letra de identificación fiscal"),
 	rifNumber: yup
-		.number()
-		.min(6, "El número de identificación debe tener mínimo 1 digito")
-		.max(12, "El número de identificación debe tener máximo 3 digitos")
+		.string()
+		.matches(
+			expresions.docId,
+			"Debe introducir un número de identificación valido, y debe tener de 6 a 12 digitos"
+		)
 		.required("Debe introducir un número de identificación"),
 	firstPhoneSelect: yup
 		.string()
@@ -100,12 +108,12 @@ const validationSchema = yup.object({
 		.string()
 		.required("Debe seleccionar un prefijo telefónico"),
 	porcentIva: yup
-		.number()
-		.positive("El valor debe ser positivo")
-		.max(100, "El porcentaje de IVA no debe ser mayor a 100"),
+		.string()
+		.required("Debe introducir un numero"),
 });
 
 const sendValues = (values) => {
+	const iva = values.porcentIva.replace('.,', '')
 	return {
 		company_name: values.companyName,
 		company_mail: values.companyMail,
@@ -116,9 +124,9 @@ const sendValues = (values) => {
 		company_rif: values.rifSelect + "-" + values.rifNumber,
 		id_money_1: values.firstCurrency,
 		id_money_2: values.secondCurrency,
-		iva: values.porcentIva,
+		iva: iva / 100,
 		number_format: values.numberFormat,
-		qty_decimal: values.decimalQuantity / 100,
+		qty_decimal: values.decimalQuantity,
 	};
 };
 

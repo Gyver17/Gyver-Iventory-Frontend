@@ -22,4 +22,21 @@ const login = async (user) => {
     }
 };
 
-export { login };
+const logout = async (token) => {
+    try {
+        const request = await fetch(url + "log", {
+            method: "PUT",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "x-access-token": token,
+            },
+        });
+        const queryData = await request.json();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { login, logout };

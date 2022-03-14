@@ -22,7 +22,7 @@ import {requestDelete} from "./hooks/nestedRequest"
 const UsersSetting = () => {
     // Global State
     const [state, dispatch] = useContext(AuthContext);
-    const { user } = state;
+    const { user } = state
 
     // Component State
     const [userForm, setUserForm] = useState({ isOpen: false, title: "" });

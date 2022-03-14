@@ -15,6 +15,11 @@
   font-style: italic;
 }
 
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
 .container::-webkit-scrollbar {
   -webkit-appearance: none;
 }

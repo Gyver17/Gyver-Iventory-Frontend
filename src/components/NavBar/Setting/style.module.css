@@ -23,7 +23,7 @@
   font-size: 30px;
 }
 
-.tooltip:hover > .title_tooltip div {
+.tooltip:hover > .title_tooltip i {
   padding: 0px 8px;
   transform: rotate(90deg);
   transition: transform 0.4s;
@@ -86,7 +86,7 @@
 }
 
 .link i,
-.link div {
+.link span {
   padding: 0px 5px;
   font-size: 16px;
 }

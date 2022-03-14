@@ -21,7 +21,7 @@ import { getMoney, deleteMoney } from "../../../api/money";
 const MoneySetting = () => {
     // Global State
     const [state, dispatch] = useContext(AuthContext);
-    const { user } = state;
+    const { user, setting } = state
 
     // Component State
     const [form, setForm] = useState({ isOpen: false, title: "" });
@@ -86,7 +86,8 @@ const MoneySetting = () => {
                         headerButtons={button}
                         header={column}
                         data={data}
-                        formatDecimal='0,000.00'
+                        formatDecimal={setting.number_format}
+                        quantityDecimal={setting.qty_decimal}
                         // moneySymbol={data.symbol}
                         aroundCurrentPage={5}
                         action={action}

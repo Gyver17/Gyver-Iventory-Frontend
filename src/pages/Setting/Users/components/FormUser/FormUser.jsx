@@ -28,7 +28,7 @@ const FormUser = ({ userForm, setUserForm, update, queryClient }) => {
 
     // Global State
     const [state, dispatch] = useContext(AuthContext);
-    const { user } = state;
+    const { user } = state
     const token = user.token;
 
     // Component States
