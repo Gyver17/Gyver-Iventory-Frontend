@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/authProvider";
 import { types } from "../../../context/authReducer";
 import { logout } from "../../../api/log";
@@ -8,6 +9,9 @@ const ButtonLog = () => {
     const [state, dispatch] = useContext(AuthContext);
     const { user } = state;
 
+    const [, dispatch] = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
@@ -16,6 +20,7 @@ const ButtonLog = () => {
             localStorage.removeItem("user");
             localStorage.removeItem("permissions");
             localStorage.removeItem("setting");
+            navigate("/");
         } catch (error) {
             console.log(error);
         }

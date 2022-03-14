@@ -11,7 +11,9 @@ const SessionExpired = ({ serverError }) => {
     const handleSubmit = (e) => {
         try {
             e.preventDefault();
-            localStorage.removeItem("data");
+            localStorage.removeItem("user");
+            localStorage.removeItem("permissions");
+            localStorage.removeItem("setting");
             dispatch({ type: types.clearSession });
             navigate("/");
         } catch (error) {
