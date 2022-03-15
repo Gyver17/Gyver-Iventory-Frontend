@@ -8,8 +8,6 @@ import styles from "./style.module.css";
 const ButtonLog = () => {
     const [state, dispatch] = useContext(AuthContext);
     const { user } = state;
-
-    const [, dispatch] = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {

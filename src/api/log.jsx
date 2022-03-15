@@ -34,6 +34,7 @@ const logout = async (token) => {
             },
         });
         const queryData = await request.json();
+        return queryData
     } catch (error) {
         console.log(error);
     }
