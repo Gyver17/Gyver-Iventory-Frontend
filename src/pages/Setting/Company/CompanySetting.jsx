@@ -32,6 +32,7 @@ const CompanySetting = () => {
     const [id, setId] = useState()
     const [currencyOptions, setCurrencyOptions] = useState({});
     const [loading, setLoading] = useState(false);
+    const [requestLoading, setRequestLoading] = useState(false)
 
     useEffect(() => {
         const query = async () => {
@@ -64,10 +65,12 @@ const CompanySetting = () => {
 
     const onSubmit = async (data) => {
         const body = sendValues(data);
+        setRequestLoading(true)
         const request = await updateSetting(id, user.token, body, dispatch, toast)
         if(request) {
             reset(initialValues(body))
         }
+        setRequestLoading(false)
     };
 
     return (
@@ -91,7 +94,7 @@ const CompanySetting = () => {
                     </div>
 
                     <div className={styles.button}>
-                        <ButtonForm title='Guardar' type='submit' />
+                        <ButtonForm title={requestLoading ? 'Guardando...' : 'Guardar'} type='submit' />
                     </div>
                 </>
             ) : (
