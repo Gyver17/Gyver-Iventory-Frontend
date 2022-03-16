@@ -56,14 +56,17 @@ const Table = ({
                     {action && (
                         <td>
                             <div className={styles.action}>
-                                {action.map((a) => (
-                                    <button
-                                        className={styles.button}
-                                        onClick={(e) => a.onClick(dt)}
-                                    >
-                                        <span className={a.icon} />
-                                    </button>
-                                ))}
+                                {action.map(
+                                    (a) =>
+                                        false && (
+                                            <button
+                                                className={styles.button}
+                                                onClick={(e) => a.onClick(dt)}
+                                            >
+                                                <span className={a.icon} />
+                                            </button>
+                                        )
+                                )}
                             </div>
                         </td>
                     )}
