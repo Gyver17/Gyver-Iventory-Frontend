@@ -113,7 +113,7 @@ const validationSchema = yup.object({
 });
 
 const sendValues = (values) => {
-	const iva = values.porcentIva.replace('.,', '')
+	const iva = values.porcentIva.replace(".,", "");
 	return {
 		company_name: values.companyName,
 		company_mail: values.companyMail,

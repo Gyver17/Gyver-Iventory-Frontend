@@ -23,13 +23,13 @@ const NumberField = ({
 		const numberFormat = () => {
 			if (settingFormat === "0.000,00") {
 				setSeparator({
-					thousands: ",",
-					decimal: ".",
+					thousands: ".",
+					decimal: ",",
 				});
 			} else {
 				setSeparator({
-					thousands: ".",
-					decimal: ",",
+					thousands: ",",
+					decimal: ".",
 				});
 			}
 		};

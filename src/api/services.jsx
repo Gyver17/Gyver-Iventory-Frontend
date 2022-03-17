@@ -3,15 +3,15 @@ import requestRejected from "../helpers/requestRejected";
 
 /* ------ Helpers ------ */
 const constraintViolated = (code, toast) => {
-    if (code === "41585") {
-        toast.error("El Nombre De La Moneda Ya Esta Registrado");
+    if (code === "31736") {
+        toast.error("El Codigo Del Servicio Ya Esta Registrado");
     }
 };
 
 /* ------ Request ------ */
-const getMoney = async (token, dispatch, toast) => {
+const getServices = async (token, dispatch, toast) => {
     try {
-        const request = await fetch(url + "money", {
+        const request = await fetch(url + "services", {
             method: "GET",
             mode: "cors",
             credentials: "include",
@@ -22,10 +22,8 @@ const getMoney = async (token, dispatch, toast) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
             return queryData;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             return [];
@@ -35,9 +33,9 @@ const getMoney = async (token, dispatch, toast) => {
     }
 };
 
-const createMoney = async (token, body, dispatch, toast, queryClient) => {
+const createServices = async (token, body, dispatch, toast, queryClient) => {
     try {
-        const request = await fetch(url + "money", {
+        const request = await fetch(url + "services", {
             method: "POST",
             mode: "cors",
             credentials: "include",
@@ -49,12 +47,10 @@ const createMoney = async (token, body, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
-            toast.success("Moneda Creada Exitosamente");
-            queryClient.invalidateQueries("getMoney");
+            toast.success("Servicio Creado Exitosamente");
+            queryClient.invalidateQueries("getServices");
             return true;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -65,9 +61,16 @@ const createMoney = async (token, body, dispatch, toast, queryClient) => {
     }
 };
 
-const updateMoney = async (id, token, body, dispatch, toast, queryClient) => {
+const updateServices = async (
+    id,
+    token,
+    body,
+    dispatch,
+    toast,
+    queryClient
+) => {
     try {
-        const request = await fetch(url + "money/" + id, {
+        const request = await fetch(url + "services/" + id, {
             method: "PUT",
             mode: "cors",
             credentials: "include",
@@ -79,12 +82,10 @@ const updateMoney = async (id, token, body, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
-            toast.success("Moneda Actualizada Con Exito");
-            queryClient.invalidateQueries("getMoney");
+            toast.success("Servicio Actualizado Con Exito");
+            queryClient.invalidateQueries("getServices");
             return true;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -95,9 +96,9 @@ const updateMoney = async (id, token, body, dispatch, toast, queryClient) => {
     }
 };
 
-const deleteMoney = async (id, token, dispatch, toast, queryClient) => {
+const deleteServices = async (id, token, dispatch, toast, queryClient) => {
     try {
-        const request = await fetch(url + "money/" + id, {
+        const request = await fetch(url + "services/" + id, {
             method: "DELETE",
             mode: "cors",
             credentials: "include",
@@ -108,12 +109,10 @@ const deleteMoney = async (id, token, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
-            toast.success("Moneda Eliminada Con Exito");
-            queryClient.invalidateQueries("getMoney");
+            toast.success("Servicio Eliminado Con Exito");
+            queryClient.invalidateQueries("getServices");
             return true;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -123,4 +122,4 @@ const deleteMoney = async (id, token, dispatch, toast, queryClient) => {
     }
 };
 
-export { getMoney, createMoney, updateMoney, deleteMoney };
+export { getServices, createServices, updateServices, deleteServices };

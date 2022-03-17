@@ -28,10 +28,8 @@ const getCategory = async (token, dispatch, toast) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            // return { queryData, success: true };
             return queryData;
         } else {
-            // return { queryData, success: false };
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             return [];
@@ -55,12 +53,10 @@ const createCategory = async (token, body, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            // return { queryData, success: true };
             toast.success("Categoria Creada Exitosamente");
             queryClient.invalidateQueries("getCategory");
             return true;
         } else {
-            // return { queryData, success: false };
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -92,12 +88,10 @@ const updateCategory = async (
         });
         const queryData = await request.json();
         if (request.ok) {
-            // return { queryData, success: true };
             toast.success("Categoria Actualizada Con Exito");
             queryClient.invalidateQueries("getCategory");
             return true;
         } else {
-            // return { queryData, success: false };
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -121,12 +115,10 @@ const deleteCategory = async (id, token, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            // return { queryData, success: true };
             toast.success("Categoria Eliminada Con Exito");
             queryClient.invalidateQueries("getCategory");
             return true;
         } else {
-            // return { queryData, success: false };
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);

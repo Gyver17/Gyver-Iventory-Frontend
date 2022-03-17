@@ -29,7 +29,7 @@ const Table = ({
 
     const types = (column, row) => {
         if (column.type === "money") {
-            return moneySymbol + format(row[column.field]);
+            return moneySymbol + ' ' + format(row[column.field]);
         }
         if (column.type === "numeric") {
             return format(row[column.field]);
@@ -58,7 +58,7 @@ const Table = ({
                             <div className={styles.action}>
                                 {action.map(
                                     (a) =>
-                                        false && (
+                                        a.render && (
                                             <button
                                                 className={styles.button}
                                                 onClick={(e) => a.onClick(dt)}

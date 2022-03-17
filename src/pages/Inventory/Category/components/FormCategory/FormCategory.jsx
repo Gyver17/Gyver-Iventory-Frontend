@@ -19,6 +19,7 @@ import { createCategory, updateCategory } from "../../../../../api/category";
 import { AuthContext } from "../../../../../context/authProvider";
 import { expresions } from "../../../../../const/ExpReg";
 
+/* ------ Component ------ */
 const FormCategory = ({ form, setForm, update, queryClient }) => {
 	// Const
 	const initialValues = {

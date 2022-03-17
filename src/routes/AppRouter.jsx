@@ -44,7 +44,7 @@ const AppRouter = () => {
           {/* Private Routes*/}
           <Route element={<PrivateRoute />}>
             <Route path='/' element={<Home />} />
-            {permissions?.product && (
+            {permissions?.products && (
               <Route path='/products' element={<Products />} />
             )}
             {permissions?.category && (

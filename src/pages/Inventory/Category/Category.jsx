@@ -21,7 +21,7 @@ import { AuthContext } from "../../../context/authProvider";
 const Category = () => {
     // Global State
     const [state, dispatch] = useContext(AuthContext);
-    const { user } = state;
+    const { user, permissions } = state;
 
     // Component State
     const [form, setForm] = useState({ isOpen: false, title: "" });
@@ -52,6 +52,7 @@ const Category = () => {
     const button = [
         {
             icon: "icon iconplus",
+            render: permissions?.category_create,
             onClick: () => openForm(true, "Crear Nueva Categoria", false),
         },
     ];
@@ -59,10 +60,12 @@ const Category = () => {
     const action = [
         {
             icon: "icon icondocument-edit1",
+            render: permissions?.category_update,
             onClick: (row) => openForm(true, "Modificar Categoria", true, row),
         },
         {
             icon: "icon icontrash-can3",
+            render: permissions?.category_delete,
             onClick: async (row) =>
                 await deleteCategory(
                     row.id,
@@ -87,7 +90,12 @@ const Category = () => {
                         header={column}
                         data={data}
                         aroundCurrentPage={5}
-                        action={action}
+                        action={
+                            permissions?.category_update ||
+                            permissions.category_delete
+                                ? action
+                                : false
+                        }
                     />
                 ) : (
                     <PageLoading />

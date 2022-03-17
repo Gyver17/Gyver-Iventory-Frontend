@@ -3,15 +3,18 @@ import requestRejected from "../helpers/requestRejected";
 
 /* ------ Helpers ------ */
 const constraintViolated = (code, toast) => {
-    if (code === "41585") {
-        toast.error("El Nombre De La Moneda Ya Esta Registrado");
+    if (code === "16261") {
+        toast.error("El Codigo Del Producto Ya Esta Registrado");
+    }
+    if (code === "80857") {
+        toast.error("La Categoria Seleccionada No Esta Registrada");
     }
 };
 
 /* ------ Request ------ */
-const getMoney = async (token, dispatch, toast) => {
+const getProducts = async (token, dispatch, toast) => {
     try {
-        const request = await fetch(url + "money", {
+        const request = await fetch(url + "products", {
             method: "GET",
             mode: "cors",
             credentials: "include",
@@ -22,10 +25,8 @@ const getMoney = async (token, dispatch, toast) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
             return queryData;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             return [];
@@ -35,9 +36,9 @@ const getMoney = async (token, dispatch, toast) => {
     }
 };
 
-const createMoney = async (token, body, dispatch, toast, queryClient) => {
+const createProducts = async (token, body, dispatch, toast, queryClient) => {
     try {
-        const request = await fetch(url + "money", {
+        const request = await fetch(url + "products", {
             method: "POST",
             mode: "cors",
             credentials: "include",
@@ -49,12 +50,10 @@ const createMoney = async (token, body, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
-            toast.success("Moneda Creada Exitosamente");
-            queryClient.invalidateQueries("getMoney");
+            toast.success("Producto Creado Exitosamente");
+            queryClient.invalidateQueries("getProducts");
             return true;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -65,9 +64,16 @@ const createMoney = async (token, body, dispatch, toast, queryClient) => {
     }
 };
 
-const updateMoney = async (id, token, body, dispatch, toast, queryClient) => {
+const updateProducts = async (
+    id,
+    token,
+    body,
+    dispatch,
+    toast,
+    queryClient
+) => {
     try {
-        const request = await fetch(url + "money/" + id, {
+        const request = await fetch(url + "products/" + id, {
             method: "PUT",
             mode: "cors",
             credentials: "include",
@@ -79,12 +85,10 @@ const updateMoney = async (id, token, body, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
-            toast.success("Moneda Actualizada Con Exito");
-            queryClient.invalidateQueries("getMoney");
+            toast.success("Producto Actualizado Con Exito");
+            queryClient.invalidateQueries("getProducts");
             return true;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -95,9 +99,9 @@ const updateMoney = async (id, token, body, dispatch, toast, queryClient) => {
     }
 };
 
-const deleteMoney = async (id, token, dispatch, toast, queryClient) => {
+const deleteProducts = async (id, token, dispatch, toast, queryClient) => {
     try {
-        const request = await fetch(url + "money/" + id, {
+        const request = await fetch(url + "products/" + id, {
             method: "DELETE",
             mode: "cors",
             credentials: "include",
@@ -108,12 +112,10 @@ const deleteMoney = async (id, token, dispatch, toast, queryClient) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            
-            toast.success("Moneda Eliminada Con Exito");
-            queryClient.invalidateQueries("getMoney");
+            toast.success("Producto Eliminado Con Exito");
+            queryClient.invalidateQueries("getProducts");
             return true;
         } else {
-            
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
@@ -123,4 +125,4 @@ const deleteMoney = async (id, token, dispatch, toast, queryClient) => {
     }
 };
 
-export { getMoney, createMoney, updateMoney, deleteMoney };
+export { getProducts, createProducts, updateProducts, deleteProducts };

@@ -1,0 +1,48 @@
+.container {
+  height: 80vh;
+  width: 75vw;
+  margin: 5px;
+  display: flex;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.inputs {
+  display: grid;
+  padding: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  height: 60vh;
+  overflow: auto;
+  margin: 5px;
+}
+
+.inputs::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+@media screen and (max-width: 650px) {
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0px;
+    height: 60vh;
+  }
+}

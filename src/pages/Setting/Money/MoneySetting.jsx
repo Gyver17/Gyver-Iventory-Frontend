@@ -52,6 +52,7 @@ const MoneySetting = () => {
     const button = [
         {
             icon: "icon iconplus",
+            render: true,
             onClick: () => openForm(true, "Crear Nueva Moneda", false),
         },
     ];
@@ -59,10 +60,12 @@ const MoneySetting = () => {
     const action = [
         {
             icon: "icon icondocument-edit1",
+            render: true,
             onClick: (row) => openForm(true, "Modificar Moneda", true, row),
         },
         {
             icon: "icon icontrash-can3",
+            render: true,
             onClick: async (row) =>
                 await deleteMoney(
                     row.id,

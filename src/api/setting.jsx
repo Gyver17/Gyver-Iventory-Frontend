@@ -22,10 +22,8 @@ const getSetting = async (token, dispatch, toast) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            // return { queryData, success: true };
             return queryData;
         } else {
-            // return { queryData, success: false };
             const { code } = queryData;
             requestRejected(code, dispatch, toast);
             return [];
@@ -37,7 +35,7 @@ const getSetting = async (token, dispatch, toast) => {
 
 const updateSetting = async (id, token, body, dispatch, toast) => {
     try {
-        const request = await fetch(url + "setting/" + id , {
+        const request = await fetch(url + "setting/" + id, {
             method: "PUT",
             mode: "cors",
             credentials: "include",
@@ -49,12 +47,13 @@ const updateSetting = async (id, token, body, dispatch, toast) => {
         });
         const queryData = await request.json();
         if (request.ok) {
-            toast.success("Configuraciones actualizada con exito, vuelva a iniciar session para que sean aplicadas");
+            toast.success(
+                "Configuraciones actualizada con exito, vuelva a iniciar session para que sean aplicadas"
+            );
             return true;
         } else {
-            // return { queryData, success: false };
             const { code, details } = queryData;
-            console.log(code, details)
+            console.log(code, details);
             requestRejected(code, dispatch, toast);
             constraintViolated(code, toast);
             return false;

@@ -66,6 +66,7 @@ const UsersSetting = () => {
     const button = [
         {
             icon: "icon iconplus",
+            render: true,
             onClick: () => openForm(true, "Crear Nuevo Usuario", false),
         },
     ];
@@ -73,14 +74,17 @@ const UsersSetting = () => {
     const action = [
         {
             icon: "icon icondocument-edit1",
+            render: true,
             onClick: (row) => openForm(true, "Modificar Usuario", true, row),
         },
         {
             icon: "icon iconlock-open3",
+            render: true,
             onClick: (row) => setFormPassword({isOpen: true, id: row.id}),
         },
         {
             icon: "icon icontrash-can3",
+            render: true,
             onClick: async (row) => await requestDelete(row.id, user.token, dispatch, toast, queryClient),
         },
     ];
