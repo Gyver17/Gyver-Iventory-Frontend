@@ -100,9 +100,9 @@ const Products = () => {
                         header={column}
                         data={data?.products}
                         aroundCurrentPage={5}
-                        formatDecimal={setting.number_format}
-                        quantityDecimal={setting.qty_decimal}
-                        moneySymbol={setting.first_symbol}
+                        formatDecimal={setting?.number_format}
+                        quantityDecimal={setting?.qty_decimal}
+                        moneySymbol={setting?.first_symbol}
                         action={
                             permissions?.products_update ||
                             permissions?.products_delete
@@ -119,7 +119,7 @@ const Products = () => {
                 setForm={setForm}
                 update={updateForm}
                 queryClient={queryClient}
-                options={data.optionsCategory}
+                options={data?.optionsCategory}
             />
         </>
     );

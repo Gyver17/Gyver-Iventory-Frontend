@@ -92,7 +92,7 @@ const Category = () => {
                         aroundCurrentPage={5}
                         action={
                             permissions?.category_update ||
-                            permissions.category_delete
+                            permissions?.category_delete
                                 ? action
                                 : false
                         }

@@ -90,9 +90,9 @@ const Services = () => {
 						header={column}
 						data={data}
 						aroundCurrentPage={5}
-						formatDecimal={setting.number_format}
-						quantityDecimal={setting.qty_decimal}
-						moneySymbol={setting.first_symbol}
+						formatDecimal={setting?.number_format}
+						quantityDecimal={setting?.qty_decimal}
+						moneySymbol={setting?.first_symbol}
 						action={
 							permissions?.services_update ||
 							permissions?.services_delete
