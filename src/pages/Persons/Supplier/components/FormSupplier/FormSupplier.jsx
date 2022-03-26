@@ -11,23 +11,37 @@ import ToasterMessage, {
 } from "../../../../../components/ToasterMessage/ToasterMessage";
 import TextField from "../../../../../components/TextField/TextField";
 import ErrorMessage from "../../../../../components/ErrorMessage/ErrorMessage";
-import NumberField from "../../../../../components/NumberField/NumberField";
+import SelectAndTextField from "../../../../../components/SelectAndTextField/SelectAndTextField";
 
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
-import { initialValues, validationSchema } from "../../const/values";
-import { createServices, updateServices } from "../../../../../api/services";
+import { initialValues, adaptValues, validationSchema, sendValues } from "../../const/values";
+import { createSupplier, updateSupplier } from "../../../../../api/supplier";
 import { AuthContext } from "../../../../../context/authProvider";
-import formatToNumber from "../../../../../helpers/formatToNumber";
 
 /* ------ Component ------ */
-const FormServices = ({ form, setForm, update, queryClient }) => {
+const FormSupplier = ({ form, setForm, update, queryClient }) => {
 	// Props Parent
 	const { isUpdate, row } = update;
 
+	// Select Options
+	const phoneOptions = [
+		{ value: "0412", label: "0412" },
+		{ value: "0414", label: "0414" },
+		{ value: "0424", label: "0424" },
+		{ value: "0416", label: "0416" },
+		{ value: "0426", label: "0426" },
+	];
+
+	const docOptions = [
+		{ value: "V", label: "V" },
+		{ value: "E", label: "E" },
+		{ value: "J", label: "J" },
+	];
+
 	// Global State
 	const [state, dispatch] = useContext(AuthContext);
-	const { user, setting } = state;
+	const { user } = state;
 	const token = user.token;
 
 	// Component States
@@ -35,13 +49,7 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 
 	useEffect(() => {
 		if (isUpdate) {
-			setValues({
-				code: row.code,
-				name: row.name,
-				description: row.description,
-				unit_symbol: row.unit_symbol,
-				price_unit: parseFloat(row.price_unit),
-			});
+			setValues(adaptValues(row));
 		} else {
 			setValues(initialValues);
 		}
@@ -63,18 +71,13 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 	}, [values, reset]);
 
 	const onSubmit = async (data) => {
-		data.price_unit = formatToNumber(
-			data.price_unit,
-			setting.number_format,
-			"currency"
-		);
-
+		const body = sendValues(data)
 		if (isUpdate) {
 			const id = row.id;
-			const success = await updateServices(
+			const success = await updateSupplier(
 				id,
 				token,
-				data,
+				body,
 				dispatch,
 				toast,
 				queryClient
@@ -83,9 +86,9 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 				setForm(false);
 			}
 		} else {
-			const success = await createServices(
+			const success = await createSupplier(
 				token,
-				data,
+				body,
 				dispatch,
 				toast,
 				queryClient
@@ -138,52 +141,57 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 							</div>
 							<div className={styles.input}>
 								<TextField
-									name='description'
-									type='area'
-									control={control}
-									title='Descripcion'
-									placeholder='Escribir Una descripcion'
-									icon='icon iconcalculator1'
-								/>
-								{errors.description?.message && (
-									<ErrorMessage
-										message={errors.description.message}
-									/>
-								)}
-							</div>
-							<div className={styles.input}>
-								<TextField
-									name='unit_symbol'
+									name='mail'
 									type='text'
 									control={control}
-									title='Unidad'
-									placeholder='Escribir una unidad'
+									title='Correo Electrónico'
+									placeholder='Escribir Un Correo Electrónico'
 									icon='icon iconcalculator1'
 								/>
-								{errors.unit_symbol?.message && (
+								{errors.mail?.message && (
 									<ErrorMessage
-										message={errors.unit_symbol.message}
+										message={errors.mail.message}
 									/>
 								)}
 							</div>
 							<div className={styles.input}>
-								<NumberField
-									name='price_unit'
-									// type='number'
+								<SelectAndTextField
+									name={["docIdSelect", "docIdNumber"]}
+									type='text'
+									inputmMode='numeric'
 									control={control}
 									setValue={setValue}
-									quantityDecimal={setting.qty_decimal}
-									settingFormat={setting.number_format}
-									prefix='$ '
-									title='Precio Por Unidad'
-									placeholder='Introducir Un Precio'
-									allowNegative={false}
-									icon='icon icondollar1'
+									options={docOptions}
+									title='Documento de Identificación'
+									placeholder='Escribir El Documento de Identificación'
+									selectPlaceholder='X'
+									width='65px'
 								/>
-								{errors.price_unit?.message && (
-									<ErrorMessage
-										message={errors.price_unit.message}
-									/>
+								{errors.docIdSelect?.message && (
+									<ErrorMessage message={errors.docIdSelect.message} />
+								)}
+								{errors.docIdNumber?.message && (
+									<ErrorMessage message={errors.docIdNumber.message} />
+								)}
+							</div>
+							<div className={styles.input}>
+								<SelectAndTextField
+									name={["numberPhoneSelect", "numberPhoneNumber"]}
+									type='text'
+									inputmMode='numeric'
+									control={control}
+									setValue={setValue}
+									options={phoneOptions}
+									title='Numero de Telefono'
+									placeholder='Escribir un Numero de Telefono'
+									selectPlaceholder='X'
+									width='85px'
+								/>
+								{errors.numberPhoneSelect?.message && (
+									<ErrorMessage message={errors.numberPhoneSelect.message} />
+								)}
+								{errors.numberPhoneNumber?.message && (
+									<ErrorMessage message={errors.numberPhoneNumber.message} />
 								)}
 							</div>
 						</div>
@@ -197,8 +205,8 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 								type='submit'
 								title={
 									isUpdate
-										? "Modificar Servicio"
-										: "Crear Servicio"
+										? "Modificar Proveedor"
+										: "Crear Proveedor"
 								}
 							/>
 						</div>
@@ -209,4 +217,4 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 	);
 };
 
-export default FormServices;
+export default FormSupplier;

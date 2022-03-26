@@ -11,20 +11,39 @@ import ToasterMessage, {
 } from "../../../../../components/ToasterMessage/ToasterMessage";
 import TextField from "../../../../../components/TextField/TextField";
 import ErrorMessage from "../../../../../components/ErrorMessage/ErrorMessage";
+import SelectAndTextField from "../../../../../components/SelectAndTextField/SelectAndTextField";
 import NumberField from "../../../../../components/NumberField/NumberField";
-import SelectField from "../../../../../components/SelectField/SelectField";
 
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
-import { initialValues, validationSchema } from "../../const/values";
-import { createProducts, updateProducts } from "../../../../../api/products";
-import formatToNumber from "../../../../../helpers/formatToNumber";
+import {
+	initialValues,
+	adaptValues,
+	validationSchema,
+	sendValues,
+} from "../../const/values";
+import { createEmployee, updateEmployee } from "../../../../../api/employee";
 import { AuthContext } from "../../../../../context/authProvider";
 
 /* ------ Component ------ */
-const FormProduct = ({ form, setForm, update, queryClient, options }) => {
+const FormEmployee = ({ form, setForm, update, queryClient }) => {
 	// Props Parent
 	const { isUpdate, row } = update;
+
+	// Select Options
+	const phoneOptions = [
+		{ value: "0412", label: "0412" },
+		{ value: "0414", label: "0414" },
+		{ value: "0424", label: "0424" },
+		{ value: "0416", label: "0416" },
+		{ value: "0426", label: "0426" },
+	];
+
+	const docOptions = [
+		{ value: "V", label: "V" },
+		{ value: "E", label: "E" },
+		{ value: "J", label: "J" },
+	];
 
 	// Global State
 	const [state, dispatch] = useContext(AuthContext);
@@ -36,14 +55,7 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 
 	useEffect(() => {
 		if (isUpdate) {
-			setValues({
-				code: row.code,
-				name: row.name,
-				id_category: row.id_category,
-				quantity: parseFloat(row.quantity),
-				price_buy: parseFloat(row.price_buy),
-				price_sell: parseFloat(row.price_sell),
-			});
+			setValues(adaptValues(row));
 		} else {
 			setValues(initialValues);
 		}
@@ -65,27 +77,13 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 	}, [values, reset]);
 
 	const onSubmit = async (data) => {
-		data.quantity = formatToNumber(
-			data.quantity,
-			setting.number_format,
-			"numeric"
-		);
-		data.price_buy = formatToNumber(
-			data.price_buy,
-			setting.number_format,
-			"currency"
-		);
-		data.price_sell = formatToNumber(
-			data.price_sell,
-			setting.number_format,
-			"currency"
-		);
+		const body = sendValues(data, setting.number_format);
 		if (isUpdate) {
 			const id = row.id;
-			const success = await updateProducts(
+			const success = await updateEmployee(
 				id,
 				token,
-				data,
+				body,
 				dispatch,
 				toast,
 				queryClient
@@ -94,9 +92,9 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 				setForm(false);
 			}
 		} else {
-			const success = await createProducts(
+			const success = await createEmployee(
 				token,
-				data,
+				body,
 				dispatch,
 				toast,
 				queryClient
@@ -148,49 +146,84 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 								)}
 							</div>
 							<div className={styles.input}>
-								<SelectField
-									name='id_category'
-									options={options}
+								<TextField
+									name='mail'
+									type='text'
+									control={control}
+									title='Correo Electrónico'
+									placeholder='Escribir Un Correo Electrónico'
+									icon='icon iconcalculator1'
+								/>
+								{errors.mail?.message && (
+									<ErrorMessage
+										message={errors.mail.message}
+									/>
+								)}
+							</div>
+							<div className={styles.input}>
+								<SelectAndTextField
+									name={["docIdSelect", "docIdNumber"]}
+									type='text'
+									inputmMode='numeric'
 									control={control}
 									setValue={setValue}
-									title='Categoria'
-									noOptionsMessage='Categoria No Encontrada'
-									placeholder='Seleccione Una Categoria'
+									options={docOptions}
+									title='Documento de Identificación'
+									placeholder='Escribir El Documento de Identificación'
 									selectPlaceholder='X'
+									width='65px'
 								/>
-								{errors.id_category?.message && (
+								{errors.docIdSelect?.message && (
 									<ErrorMessage
-										message={errors.id_category.message}
+										message={errors.docIdSelect.message}
+									/>
+								)}
+								{errors.docIdNumber?.message && (
+									<ErrorMessage
+										message={errors.docIdNumber.message}
 									/>
 								)}
 							</div>
 							<div className={styles.input}>
-								<NumberField
-									name='quantity'
+								<SelectAndTextField
+									name={[
+										"numberPhoneSelect",
+										"numberPhoneNumber",
+									]}
+									type='text'
+									inputmMode='numeric'
 									control={control}
 									setValue={setValue}
-									quantityDecimal={setting.qty_decimal}
-									settingFormat={setting.number_format}
-									title='Cantidad'
-									placeholder='Introducir Una Cantidad'
-									icon='icon icondollar1'
-									allowNegative={false}
+									options={phoneOptions}
+									title='Numero de Telefono'
+									placeholder='Escribir un Numero de Telefono'
+									selectPlaceholder='04XX'
+									width='85px'
 								/>
-								{errors.quantity?.message && (
+								{errors.numberPhoneSelect?.message && (
 									<ErrorMessage
-										message={errors.quantity.message}
+										message={
+											errors.numberPhoneSelect.message
+										}
+									/>
+								)}
+								{errors.numberPhoneNumber?.message && (
+									<ErrorMessage
+										message={
+											errors.numberPhoneNumber.message
+										}
 									/>
 								)}
 							</div>
 							<div className={styles.input}>
 								<NumberField
-									name='price_buy'
+									name='salary'
 									control={control}
 									setValue={setValue}
 									quantityDecimal={setting.qty_decimal}
 									settingFormat={setting.number_format}
 									prefix='$ '
-									title='Precio de Compra'
+									title='Salario'
 									placeholder='Introducir Un Precio'
 									icon='icon icondollar1'
 									allowNegative={false}
@@ -203,20 +236,45 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 							</div>
 							<div className={styles.input}>
 								<NumberField
-									name='price_sell'
+									name='comSales'
 									control={control}
 									setValue={setValue}
 									quantityDecimal={setting.qty_decimal}
 									settingFormat={setting.number_format}
-									prefix='$ '
-									title='Precio de Venta'
-									placeholder='Introducir Un Precio'
+									suffix='%'
+									title='Comision Por Ventas'
+									placeholder='Introducir Un Porcentaje'
 									icon='icon icondollar1'
 									allowNegative={false}
+									isAllowed={({ floatValue }) =>
+										floatValue <= 100
+									}
 								/>
-								{errors.price_sell?.message && (
+								{errors.comSales?.message && (
 									<ErrorMessage
-										message={errors.price_sell.message}
+										message={errors.comSales.message}
+									/>
+								)}
+							</div>
+							<div className={styles.input}>
+								<NumberField
+									name='comServices'
+									control={control}
+									setValue={setValue}
+									quantityDecimal={setting.qty_decimal}
+									settingFormat={setting.number_format}
+									suffix='%'
+									title='Comision Por Servicios'
+									placeholder='Introducir Un Porcentaje'
+									icon='icon icondollar1'
+									allowNegative={false}
+									isAllowed={({ floatValue }) =>
+										floatValue <= 100
+									}
+								/>
+								{errors.comServices?.message && (
+									<ErrorMessage
+										message={errors.comServices.message}
 									/>
 								)}
 							</div>
@@ -231,8 +289,8 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 								type='submit'
 								title={
 									isUpdate
-										? "Modificar Producto"
-										: "Crear Producto"
+										? "Modificar Empleado"
+										: "Crear Empleado"
 								}
 							/>
 						</div>
@@ -243,4 +301,4 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 	);
 };
 
-export default FormProduct;
+export default FormEmployee;

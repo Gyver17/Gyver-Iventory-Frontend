@@ -15,7 +15,7 @@
 	flex-direction: row;
 	justify-content: space-around;
 	width: 300px;
-    margin: 0px 5px;
+    margin: 0px 10px;
 	padding: 5px;
 }
 
@@ -27,11 +27,15 @@
     border: 2px solid var(--secondary);
     border-radius: 5px;
     padding: 0px 5px;
-    margin: 0px 5px;
+    margin: 0px;
     background: var(--cardBackground);
 }
 
 @media screen and (max-width: 1024px) {
+    .inputs {
+        width: 250px;
+    }
+
     .inputs input {
         height: 35px;
     }

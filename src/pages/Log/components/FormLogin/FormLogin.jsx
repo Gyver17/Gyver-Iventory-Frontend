@@ -39,7 +39,7 @@ const FormLogin = () => {
             <h3>Iniciar Sección</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {message && (
-                    <ErrorMessage message={message} style={{ width: "100%" }} />
+                    <ErrorMessage message={message} style={{ width: "100%", margin: "0px" }} />
                 )}
 
                 <div className={styles.mail}>
@@ -50,7 +50,7 @@ const FormLogin = () => {
                 {errors.mail?.message && (
                     <ErrorMessage
                         message={errors.mail.message}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", margin: "0px" }}
                     />
                 )}
 
@@ -66,7 +66,7 @@ const FormLogin = () => {
                 {errors.password?.message && (
                     <ErrorMessage
                         message={errors.password.message}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", margin: "0px" }}
                     />
                 )}
 

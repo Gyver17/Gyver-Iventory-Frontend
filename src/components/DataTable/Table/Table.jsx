@@ -29,10 +29,14 @@ const Table = ({
 
     const types = (column, row) => {
         if (column.type === "money") {
-            return moneySymbol + ' ' + format(row[column.field]);
+            return moneySymbol + ' ' + format(parseFloat(row[column.field]));
         }
+        if (column.type === "porcent") {
+            return format(parseFloat(100*row[column.field])) + "%";
+        }
+
         if (column.type === "numeric") {
-            return format(row[column.field]);
+            return format(parseFloat(row[column.field]));
         }
         if (column.type === "rol") {
             if (row[column.field] === "admin") {

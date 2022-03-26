@@ -12,28 +12,22 @@ const column = [
         sortable: true,
     },
     {
-        title: "Categoria",
-        field: "category",
+        title: "Documento de identificación",
+        field: "doc_id",
         type: "string",
         sortable: true,
     },
     {
-        title: "Cantidad",
-        field: "quantity",
-        type: "numeric",
-        sortable: false,
+        title: "Correo Electrónico",
+        field: "mail",
+        type: "string",
+        sortable: true,
     },
     {
-        title: "Precio de Compra",
-        field: "price_buy",
-        type: "money",
-        sortable: false,
-    },
-    {
-        title: "Precio de Venta",
-        field: "price_sell",
-        type: "money",
-        sortable: false,
+        title: "Numero de Telefono",
+        field: "phone",
+        type: "string",
+        sortable: true,
     },
 ];
 
@@ -41,9 +35,11 @@ const searchData = (data, value) => {
     let expresion = new RegExp(`${value}.*`, "i");
     return data.filter(
         (data) =>
-            expresion.test(data.code) ||
             expresion.test(data.name) ||
-            expresion.test(data.category)
+            expresion.test(data.code) ||
+            expresion.test(data.mail) ||
+            expresion.test(data.doc_id) ||
+            expresion.test(data.phone)
     );
 };
 
