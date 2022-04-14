@@ -18,7 +18,6 @@ import styles from "./style.module.css";
 import { initialValues, validationSchema } from "../../const/values";
 import { createServices, updateServices } from "../../../../../api/services";
 import { AuthContext } from "../../../../../context/authProvider";
-import formatToNumber from "../../../../../helpers/formatToNumber";
 
 /* ------ Component ------ */
 const FormServices = ({ form, setForm, update, queryClient }) => {
@@ -50,7 +49,6 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 	const {
 		control,
 		handleSubmit,
-		setValue,
 		reset,
 		formState: { errors },
 	} = useForm({
@@ -63,11 +61,11 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 	}, [values, reset]);
 
 	const onSubmit = async (data) => {
-		data.price_unit = formatToNumber(
+		/*data.price_unit = formatToNumber(
 			data.price_unit,
 			setting.number_format,
 			"currency"
-		);
+		);*/
 
 		if (isUpdate) {
 			const id = row.id;
@@ -169,12 +167,10 @@ const FormServices = ({ form, setForm, update, queryClient }) => {
 							<div className={styles.input}>
 								<NumberField
 									name='price_unit'
-									// type='number'
 									control={control}
-									setValue={setValue}
-									quantityDecimal={setting.qty_decimal}
-									settingFormat={setting.number_format}
-									prefix='$ '
+									quantityDecimal={setting?.qty_decimal}
+									settingFormat={setting?.number_format}
+									prefix={setting?.first_symbol + " "}
 									title='Precio Por Unidad'
 									placeholder='Introducir Un Precio'
 									allowNegative={false}

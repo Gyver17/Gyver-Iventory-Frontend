@@ -83,7 +83,7 @@ const MoneySetting = () => {
             <div className={styles.container}>
                 {isSuccess ? (
                     <DataTable
-                        title='Monedas'
+                        title='Divisas'
                         numberOfEntries={[5, 10, 15, 20]}
                         searchData={searchData}
                         headerButtons={button}
@@ -91,7 +91,6 @@ const MoneySetting = () => {
                         data={data}
                         formatDecimal={setting.number_format}
                         quantityDecimal={setting.qty_decimal}
-                        // moneySymbol={data.symbol}
                         aroundCurrentPage={5}
                         action={action}
                     />

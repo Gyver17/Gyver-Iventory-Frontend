@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--font_color_2);
+}
+
+.numberField {
+    width: 120px;
+    height: 35px;
+    font-style: italic;
+    outline: none;
+    border: 2px solid var(--secondary);
+    border-radius: 5px;
+    padding: 0px 5px;
+    background: var(--cardBackground);
+    margin: 5px 10px;
+}
+
+@media screen and (max-width: 1024px) {
+    /*.title {
+        font-size: 16px;
+    }
+
+    .numberField {
+        width: 250px;
+        height: 35px;
+    }*/
+}

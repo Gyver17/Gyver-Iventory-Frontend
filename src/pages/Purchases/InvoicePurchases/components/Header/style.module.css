@@ -1,0 +1,26 @@
+.container {
+	margin: 0px 20px;
+	padding: 10px 0px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: 2px solid var(--secondary);
+}
+
+.title {
+	color: var(--quintenary);
+	*font-weight: bold;
+	font-size: 30px;
+}
+
+@media screen and (max-width: 450px){
+    .container {
+        flex-direction: column;
+        *justify-content: flex-start;
+        *padding: 10px 0px;
+    }
+
+    .title {
+		font-size: 20px;
+	}
+}

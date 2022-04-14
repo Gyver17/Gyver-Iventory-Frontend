@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+}
+
+.container span {
+	font-size: 18px;
+	font-weight: bold;
+	color: var(--font_color_2);
+}
+
+.container textarea {
+	margin: 5px 10px;
+	outline: none;
+	border: 2px solid var(--secondary);
+	border-radius: 5px;
+	padding: 5px;
+	height: 120px;
+	width: 100%;
+}
+
+@media screen and (max-width: 350px){
+    .container {
+        width: 250px;
+    }
+}

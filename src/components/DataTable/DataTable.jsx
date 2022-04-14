@@ -41,12 +41,14 @@ const DataTable = ({
             <div>
                 <div className={styles.titleAndSearch}>
                     {title && <div className={styles.title}>{title}</div>}
-                    <Search
-                        onSearch={(value) => {
-                            setSearch(value);
-                            setCurrentPage(1);
-                        }}
-                    />
+                    {searchData && (
+                        <Search
+                            onSearch={(value) => {
+                                setSearch(value);
+                                setCurrentPage(1);
+                            }}
+                        />
+                    )}
                 </div>
                 <Header
                     options={numberOfEntries}

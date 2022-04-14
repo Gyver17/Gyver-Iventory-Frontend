@@ -18,7 +18,6 @@ import SelectField from "../../../../../components/SelectField/SelectField";
 import styles from "./style.module.css";
 import { initialValues, validationSchema } from "../../const/values";
 import { createProducts, updateProducts } from "../../../../../api/products";
-import formatToNumber from "../../../../../helpers/formatToNumber";
 import { AuthContext } from "../../../../../context/authProvider";
 
 /* ------ Component ------ */
@@ -65,21 +64,6 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 	}, [values, reset]);
 
 	const onSubmit = async (data) => {
-		data.quantity = formatToNumber(
-			data.quantity,
-			setting.number_format,
-			"numeric"
-		);
-		data.price_buy = formatToNumber(
-			data.price_buy,
-			setting.number_format,
-			"currency"
-		);
-		data.price_sell = formatToNumber(
-			data.price_sell,
-			setting.number_format,
-			"currency"
-		);
 		if (isUpdate) {
 			const id = row.id;
 			const success = await updateProducts(
@@ -156,7 +140,6 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 									title='Categoria'
 									noOptionsMessage='Categoria No Encontrada'
 									placeholder='Seleccione Una Categoria'
-									selectPlaceholder='X'
 								/>
 								{errors.id_category?.message && (
 									<ErrorMessage
@@ -168,7 +151,6 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 								<NumberField
 									name='quantity'
 									control={control}
-									setValue={setValue}
 									quantityDecimal={setting.qty_decimal}
 									settingFormat={setting.number_format}
 									title='Cantidad'
@@ -186,10 +168,9 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 								<NumberField
 									name='price_buy'
 									control={control}
-									setValue={setValue}
 									quantityDecimal={setting.qty_decimal}
 									settingFormat={setting.number_format}
-									prefix='$ '
+									prefix={setting.first_symbol + " "}
 									title='Precio de Compra'
 									placeholder='Introducir Un Precio'
 									icon='icon icondollar1'
@@ -205,10 +186,9 @@ const FormProduct = ({ form, setForm, update, queryClient, options }) => {
 								<NumberField
 									name='price_sell'
 									control={control}
-									setValue={setValue}
 									quantityDecimal={setting.qty_decimal}
 									settingFormat={setting.number_format}
-									prefix='$ '
+									prefix={setting.first_symbol + " "}
 									title='Precio de Venta'
 									placeholder='Introducir Un Precio'
 									icon='icon icondollar1'

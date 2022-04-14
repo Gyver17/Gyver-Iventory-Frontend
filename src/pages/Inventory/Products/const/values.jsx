@@ -5,9 +5,9 @@ const initialValues = {
 	code: "",
 	name: "",
 	id_category: "",
-	quantity: "",
-	price_buy: "",
-	price_sell: "",
+	quantity: 0,
+	price_buy: 0,
+	price_sell: 0,
 };
 
 const validationSchema = yup.object({
@@ -20,21 +20,16 @@ const validationSchema = yup.object({
 		.matches(expresions.productName, "Debe introducir un Nombre valido")
 		.required("Debe introducir un Nombre"),
 	id_category: yup.string().required("Debe seleccionar una Categoria"),
-	quantity: yup.string().required("Debe introducir una Cantidad"),
+	quantity: yup.number().required("Debe introducir una Cantidad"),
 	price_buy: yup
-		.string()
+		.number()
 		.required("Debe introducir un Precio de Compra")
 		.test(
 			"precio-buy",
 			"El Precio de Compra es mayor al de Venta",
 			(price_buy, value) => {
 				const { price_sell } = value.parent;
-				let priceBuy = price_buy.replace(/[$]/g, "");
-				let priceSell = price_sell.replace(/[$]/g, "");
-				priceBuy = parseFloat(priceBuy.replace(".,", ""));
-				priceSell = parseFloat(priceSell.replace(".,", ""));
-
-				if (priceBuy >= priceSell) {
+				if (price_buy >= price_sell) {
 					return false;
 				} else {
 					return true;
@@ -42,19 +37,14 @@ const validationSchema = yup.object({
 			}
 		),
 	price_sell: yup
-		.string()
+		.number()
 		.required("Debe introducir un Precio de Venta")
 		.test(
 			"precio-sell",
 			"El Precio de Compra es mayor al de Venta",
 			(price_sell, value) => {
 				const { price_buy } = value.parent;
-				let priceBuy = price_buy.replace(/[$]/g, "");
-				let priceSell = price_sell.replace(/[$]/g, "");
-				priceBuy = parseFloat(priceBuy.replace(".,", ""));
-				priceSell = parseFloat(priceSell.replace(".,", ""));
-
-				if (priceBuy >= priceSell) {
+				if (price_buy >= price_sell) {
 					return false;
 				} else {
 					return true;

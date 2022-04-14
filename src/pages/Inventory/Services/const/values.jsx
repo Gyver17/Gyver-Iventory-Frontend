@@ -6,7 +6,7 @@ const initialValues = {
 	name: "",
 	description: "",
 	unit_symbol: "",
-	price_unit: "",
+	price_unit: 0,
 };
 
 const validationSchema = yup.object({
@@ -32,7 +32,7 @@ const validationSchema = yup.object({
 			"Debe introducir un Symbolo  valido, que debe contener de 1 a 4 caracteres"
 		)
 		.required("Debe introducir un Symbolo"),
-	price_unit: yup.string().required("Debe introducir un Precio Por Unidad"),
+	price_unit: yup.number().required("Debe introducir un Precio Por Unidad"),
 });
 
 export { initialValues, validationSchema };

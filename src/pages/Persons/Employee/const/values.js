@@ -1,6 +1,5 @@
 import * as yup from "yup";
 import { expresions } from "../../../../const/ExpReg";
-import formatToNumber from "../../../../helpers/formatToNumber";
 
 const initialValues = {
 	code: "",
@@ -10,9 +9,9 @@ const initialValues = {
 	docIdNumber: "",
 	numberPhoneSelect: "",
 	numberPhoneNumber: "",
-	salary: "",
-	comSales: "",
-	comServices: "",
+	salary: 0,
+	comSales: 0,
+	comServices: 0,
 };
 
 const adaptValues = (values) => {
@@ -70,9 +69,9 @@ const validationSchema = yup.object({
 			"Debe introducir un número telefónico valido"
 		)
 		.required("Debe introducir un Número telefónico"),
-	salary: yup.string().required("Debe introducir un salario"),
-	comSales: yup.string().required("Debe introducir un numero"),
-	comServices: yup.string().required("Debe introducir un numero"),
+	salary: yup.number().required("Debe introducir un salario"),
+	comSales: yup.number().required("Debe introducir un numero"),
+	comServices: yup.number().required("Debe introducir un numero"),
 });
 
 const sendValues = (values, format) => {
@@ -82,9 +81,9 @@ const sendValues = (values, format) => {
 		doc_id: values.docIdSelect + "-" + values.docIdNumber,
 		mail: values.mail,
 		phone: values.numberPhoneSelect + "-" + values.numberPhoneNumber,
-		salary: formatToNumber(values.salary, format, "currency"),
-		com_sell: formatToNumber(values.comSales, format, "porcent") / 100,
-		com_service: formatToNumber(values.comServices, format, "porcent") / 100,
+		salary: values.salary,
+		com_sell: values.comSales / 100,
+		com_service: values.comServices / 100,
 	};
 };
 

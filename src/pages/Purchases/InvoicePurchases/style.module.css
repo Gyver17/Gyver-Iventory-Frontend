@@ -1,0 +1,144 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: var(--cardBackground);
+}
+
+.container form {
+    *width: 100vw;
+}
+
+.body {
+    height: 70vh;
+    *width: 100%;
+    overflow: auto;
+}
+
+.body::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.body::-webkit-scrollbar:vertical {
+  width: 8px;
+}
+
+.body::-webkit-scrollbar-button:increment,
+.body::-webkit-scrollbar-button {
+  display: none;
+}
+
+.body::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarBackground);
+  border-radius: 20px;
+  border: 2px solid var(--scrollbarBorder);
+}
+
+.body::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.title {
+    margin: 10px 20px;
+    font-size: 35px;
+    color: var(--font_color_2);
+}
+
+.subTitle {
+    margin: 0px 20px;
+    font-size: 30px;
+    color: var(--font_color_2);
+}
+
+.bodyInvoice {
+    margin: 10px 20px;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.foosterInvoice {
+    margin: 0px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 10px;
+}
+
+@media screen and (max-width: 1024px){
+    .body {
+        height: 60vh;
+    }
+}
+
+@media screen and (max-width: 950px){
+    .body {
+        height: 60vh;
+    }
+
+    .bodyInvoice {
+        flex-direction: column-reverse;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .foosterInvoice {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .container{
+        margin: 0px;
+    }
+
+    .body {
+        width: 70vh;
+        *margin: 0px;
+    }
+
+    .body::-webkit-scrollbar:vertical {
+      display: none;
+    }
+
+    .body::-webkit-scrollbar:horizontal {
+      display: none;
+    }
+
+    .title {
+        margin: 5px;
+        font-size: 25px;
+    }
+
+    .subTitle {
+        margin: 0px 10px;
+        font-size: 20px;
+    }
+
+    .bodyInvoice {
+        margin: 5px;
+        padding: 10px 0px;
+        *border: 0px;
+    }
+
+    .foosterInvoice {
+        margin: 5px;
+    }
+
+    .buttons {
+        justify-content: space-around;
+    }
+}

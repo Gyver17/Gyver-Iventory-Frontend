@@ -11,6 +11,7 @@ import ToasterMessage, {
 } from "../../../../../components/ToasterMessage/ToasterMessage";
 import TextField from "../../../../../components/TextField/TextField";
 import ErrorMessage from "../../../../../components/ErrorMessage/ErrorMessage";
+import NumberField from "../../../../../components/NumberField/NumberField";
 
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
@@ -24,7 +25,7 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 
 	// Global State
 	const [state, dispatch] = useContext(AuthContext);
-	const { user } = state
+	const { user, setting } = state;
 	const token = user.token;
 
 	// Component States
@@ -32,7 +33,11 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 
 	useEffect(() => {
 		if (isUpdate) {
-			setValues(row);
+			setValues({
+				name: row.name,
+				symbol: row.symbol,
+				value: parseFloat(row.value),
+			});
 		} else {
 			setValues(initialValues);
 		}
@@ -112,13 +117,15 @@ const FormMoney = ({ form, setForm, update, queryClient }) => {
 							{errors.symbol?.message && (
 								<ErrorMessage message={errors.symbol.message} />
 							)}
-							<TextField
+							<NumberField
 								name='value'
-								type='number'
 								control={control}
-								title='Valor'
-								placeholder='Escribir Un Valor'
-								icon='icon iconcalculator1'
+								quantityDecimal={setting.qty_decimal}
+								settingFormat={setting.number_format}
+								title='Precio de Compra'
+								placeholder='Introducir Un Precio'
+								icon='icon icondollar1'
+								allowNegative={false}
 							/>
 							{errors.value?.message && (
 								<ErrorMessage message={errors.value.message} />

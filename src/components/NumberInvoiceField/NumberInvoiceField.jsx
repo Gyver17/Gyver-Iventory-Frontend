@@ -3,13 +3,14 @@ import styles from "./style.module.css";
 import { useController } from "react-hook-form";
 import NumberFormat from "react-number-format";
 
-const NumberField = ({
+const NumberInvoiceField = ({
 	title,
 	control,
 	icon,
 	name,
 	quantityDecimal,
 	settingFormat,
+	width,
 	...props
 }) => {
 	const { field } = useController({
@@ -59,4 +60,4 @@ const NumberField = ({
 	);
 };
 
-export default NumberField;
+export default NumberInvoiceField;

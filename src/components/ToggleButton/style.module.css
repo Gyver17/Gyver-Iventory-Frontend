@@ -6,6 +6,7 @@
 
 .title {
   font-size: 18px;
+  font-weight: bold;
   color: var(--font_color_2);
 }
 

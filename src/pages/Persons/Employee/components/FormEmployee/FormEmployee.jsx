@@ -219,7 +219,6 @@ const FormEmployee = ({ form, setForm, update, queryClient }) => {
 								<NumberField
 									name='salary'
 									control={control}
-									setValue={setValue}
 									quantityDecimal={setting.qty_decimal}
 									settingFormat={setting.number_format}
 									prefix='$ '

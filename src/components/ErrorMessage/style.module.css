@@ -6,8 +6,8 @@
 	width: 300px;
 }
 
-.container span {
-	color: white;
+.span {
+	color: var(--font_color_1);
 	font-style: italic;
 	margin: 5px;
 	font-size: 14px;

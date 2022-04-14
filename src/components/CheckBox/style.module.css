@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0px 5px;
+  color: var(--font_color_2);
+}

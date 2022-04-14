@@ -34,12 +34,12 @@ import SessionExpired from "../components/SessionExpired/SessionExpired";
 
 const AppRouter = () => {
   const [state] = useContext(AuthContext);
-  const { permissions, sessionExpired } = state;
+  const { user, permissions, sessionExpired } = state;
 
   return (
     <>
       <Router>
-        <NavBar />
+        {user && <NavBar />}
         <Routes>
           {/* Private Routes*/}
           <Route element={<PrivateRoute />}>

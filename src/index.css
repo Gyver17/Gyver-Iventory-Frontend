@@ -14,7 +14,13 @@
   --tertiary: #14539a;
   --quaternary: white;
   --quintenary: #032950;
-  --cardBackground: #f0f2f3;
+  /*--primary: #E04234;
+  --secondary: #1D78E0;
+  --tertiary: #C0E007;
+  --quaternary: white;
+  --quintenary: #1D78E0;*/
+  /*--cardBackground: #f0f2f3;*/
+  --cardBackground: #fffff9;
   --scrollbarBackground: #797979;
   --scrollbarBorder: #f1f2f3;
   --rowsTableBackground: #fbfafa;
@@ -33,5 +39,6 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  background: var(--cardBackground);
 }
 
