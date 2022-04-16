@@ -12,6 +12,10 @@ const constraintViolated = (code, toast) => {
             "El Documento De Identificación Del Proveedor Ya Esta Registrado"
         );
     }
+
+    if (code === "49171") {
+        toast.error("El Proveedor Ya Esta Relacionado A Una Factura");
+    }
 };
 
 /* ------ Request ------ */

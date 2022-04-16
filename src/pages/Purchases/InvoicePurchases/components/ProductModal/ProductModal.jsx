@@ -57,7 +57,7 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 
 	// Props DataTable
 	const { data, isSuccess, isError } = useQuery(
-		["getProducts", user],
+		["getProductsInvoice", user],
 		async () => {
 			const products = await getProducts(token, dispatch, toast);
 			return products;
@@ -82,7 +82,7 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 			toast.error("Debe Ingresar Una Cantidad a Facturar");
 		} else {
 			const product = {
-				id: productsInvoice.length,
+				id: row.id,
 				code: row.code,
 				name: row.name,
 				quantity: productQuantityInvoice.quantity,

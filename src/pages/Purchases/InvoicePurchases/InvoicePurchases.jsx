@@ -1,6 +1,6 @@
 /* ------ Library Import ------ */
 import React, { useState, useContext, useEffect } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -19,14 +19,15 @@ import ToasterMessage, {
 } from "../../../components/ToasterMessage/ToasterMessage";
 import PageLoading from "../../../components/PageLoading/PageLoading";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
+import MinWidth from "../../../components/MinWidth/MinWidth";
 
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
-import { getClient } from "../../../api/client";
+import { getSupplier } from "../../../api/supplier";
 import { getEmployee } from "../../../api/employee";
 import { getNumbersInvoice } from "../../../api/numbersInvoice";
-// import { column, searchData } from "./const/dataTableProps";
-import { initialValues, validationSchema } from "./const/values";
+import { createInvoicePurchases } from "../../../api/invoicePurchases";
+import { initialValues, validationSchema, sendValues } from "./const/values";
 import { AuthContext } from "../../../context/authProvider";
 
 const InvoicePurchases = () => {
@@ -38,16 +39,18 @@ const InvoicePurchases = () => {
     const [modal, setModal] = useState({ isOpen: false, title: "" });
     const [productsInvoice, setProductsInvoice] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
-    const [numberInvoice, setNumberInvoice] = useState(0)
+    const [numberInvoice, setNumberInvoice] = useState(0);
+    const [requestLoading, setRequestLoading] = useState(false);
+    const [minWidth, setMinWidth] = useState(false);
 
     // Props DataTable
     const { data, isSuccess, isError } = useQuery(
-        ["getOptions", user],
+        ["getInvoicePurchases", user],
         async () => {
             const employees = await getEmployee(user.token, dispatch, toast);
-            const clients = await getClient(user.token, dispatch, toast);
+            const suppliers = await getSupplier(user.token, dispatch, toast);
             const number = await getNumbersInvoice(user.token, dispatch, toast);
-            setNumberInvoice(number[0].buy)
+            setNumberInvoice(number[0].buy);
 
             const optionsEmployees = [];
             employees.map((employee) =>
@@ -62,28 +65,30 @@ const InvoicePurchases = () => {
                 })
             );
 
-            const optionsClients = [];
-            clients.map((client) =>
-                optionsClients.push({
-                    value: client.id,
+            const optionsSuppliers = [];
+            suppliers.map((supplier) =>
+                optionsSuppliers.push({
+                    value: supplier.id,
                     label:
-                        client.code +
+                        supplier.code +
                         " - " +
-                        client.name +
+                        supplier.name +
                         " - " +
-                        client.doc_id,
+                        supplier.doc_id,
                 })
             );
-            return { optionsEmployees, optionsClients };
+            return { optionsEmployees, optionsSuppliers };
         }
     );
+
+    const queryClient = useQueryClient();
 
     const {
         control,
         handleSubmit,
         setValue,
         getValues,
-        // reset,
+        reset,
         formState: { errors },
     } = useForm({
         defaultValues: initialValues,
@@ -94,6 +99,10 @@ const InvoicePurchases = () => {
         control,
         name: "discount",
     });
+
+    useEffect(() => {
+        setMinWidth(window.innerWidth < 800 && window.innerHeight < 600);
+    }, [setMinWidth]);
 
     useEffect(() => {
         const subTotal = productsInvoice.reduce(
@@ -115,8 +124,40 @@ const InvoicePurchases = () => {
         return <SessionExpired serverError={true} />;
     }
 
+    if (minWidth) {
+        return (
+            <MinWidth
+                content={
+                    "Debe Tener Una Resolución De Pantalla Mayor a 800x600px"
+                }
+            />
+        );
+    }
+
+    const clear = () => {
+        setProductsInvoice([]);
+        setStartDate(new Date());
+        reset();
+    };
+
     const onSubmit = (data) => {
-        console.log(data, startDate, numberInvoice);
+        const values = sendValues(
+            data,
+            startDate,
+            numberInvoice,
+            productsInvoice
+        );
+        setRequestLoading(true);
+        createInvoicePurchases(
+            user.token,
+            values,
+            dispatch,
+            toast,
+            queryClient
+        );
+        setRequestLoading(false);
+        clear();
+        console.log(values);
     };
 
     return (
@@ -161,8 +202,8 @@ const InvoicePurchases = () => {
                                     errors={errors}
                                 />
                                 <TextArea
-                                    title='Descripción'
-                                    name='description'
+                                    title='Observación'
+                                    name='observation'
                                     control={control}
                                 />
                                 {errors.description?.message && (
@@ -173,9 +214,13 @@ const InvoicePurchases = () => {
                             </div>
                         </div>
                         <div className={styles.buttons}>
-                            <ButtonForm title='Limpiar' />
+                            <ButtonForm title='Limpiar' onClick={clear} />
                             <ButtonForm
-                                title='Registrar'
+                                title={
+                                    requestLoading
+                                        ? "...Registrando"
+                                        : "Registrar"
+                                }
                                 onClick={handleSubmit(onSubmit)}
                             />
                         </div>

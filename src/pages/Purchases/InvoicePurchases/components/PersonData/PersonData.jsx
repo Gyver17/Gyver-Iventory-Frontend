@@ -20,7 +20,7 @@ function PersonData({ control, setValue, options, errors }) {
 			)}
 			<SelectField
 				name='id_supplier'
-				options={options?.optionsClients}
+				options={options?.optionsSuppliers}
 				control={control}
 				setValue={setValue}
 				title='Seleccionar Un Proveedor'

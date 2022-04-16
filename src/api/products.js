@@ -9,6 +9,9 @@ const constraintViolated = (code, toast) => {
     if (code === "80857") {
         toast.error("La Categoria Seleccionada No Esta Registrada");
     }
+    if (code === "63250") {
+        toast.error("El Producto Ya Esta Relacionado A Una Factura");
+    }
 };
 
 /* ------ Request ------ */

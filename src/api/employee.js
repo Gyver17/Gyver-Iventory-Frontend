@@ -12,7 +12,10 @@ const constraintViolated = (code, toast) => {
             "El Documento De Identificación Del Empleado Ya Esta Registrado"
         );
     }
-};
+
+    if (code === "12275") {
+        toast.error("El Empleado Ya Esta Relacionado A Una Factura");
+    }};
 
 /* ------ Request ------ */
 const getEmployee = async (token, dispatch, toast) => {

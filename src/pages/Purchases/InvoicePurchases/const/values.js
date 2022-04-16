@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import truncate from "../../../../helpers/truncate";
 
 const initialValues = {
 	id_employee: "",
@@ -10,7 +11,7 @@ const initialValues = {
 	credit: false,
 	amountPay: 0,
 	remainingAmount: 0,
-	description: "",
+	observation: "",
 };
 
 const validationSchema = yup.object({
@@ -34,6 +35,7 @@ const validationSchema = yup.object({
 		.number()
 		.required("Debe introducir un numero")
 		.min(0, "Debe agregar un producto a la factura"),
+	credit: yup.boolean(),
 	amountPay: yup.number().when("credit", {
 		is: true,
 		then: yup
@@ -69,6 +71,39 @@ const validationSchema = yup.object({
 				}
 			),
 	}),
+	observation: yup.string(),
 });
 
-export { initialValues, validationSchema };
+const sendValues = (data, date, numberInvoice, productsInvoice) => {
+	const products = productsInvoice.map((product) => {
+		return {
+			id_product: product.id,
+			quantity: product.quantity,
+			price_total: product.totalPrice,
+		};
+	});
+	console.log(date.getMonth());
+	const values = {
+		number: numberInvoice,
+		id_supplier: data.id_supplier,
+		id_employee: data.id_employee,
+		products: products,
+		price_sub: truncate(data.subTotal, 2),
+		price_porcent: truncate((data.subTotal + data.iva) / data.discount, 2),
+		price_iva: truncate(data.iva, 2),
+		price_total: truncate(data.total, 2),
+		date:
+			date.getDate() +
+			"-" +
+			(date.getMonth() + 1) +
+			"-" +
+			date.getFullYear(),
+		credit: data.credit,
+		amount_pay: truncate(data.amountPay, 2),
+		amount_remaining: truncate(data.remainingAmount, 2),
+		observation: data.observation || "",
+	};
+	return values;
+};
+
+export { initialValues, validationSchema, sendValues };
