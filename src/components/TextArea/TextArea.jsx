@@ -10,7 +10,9 @@ function TextArea({ title, name, control }) {
 	return (
 		<div className={styles.container}>
 			<span>{title}</span>
-			<textarea {...field} />
+			<textarea {...field}>
+				{field.value}
+			</textarea>
 		</div>
 	)
 }

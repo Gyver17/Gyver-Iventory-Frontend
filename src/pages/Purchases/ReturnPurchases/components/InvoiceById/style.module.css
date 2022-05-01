@@ -1,0 +1,69 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    background: var(--cardBackground);
+}
+
+.body {
+    height: 65vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.body::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.body::-webkit-scrollbar:vertical {
+  width: 8px;
+}
+
+.body::-webkit-scrollbar-button:increment,
+.body::-webkit-scrollbar-button {
+  display: none;
+}
+
+.body::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarBackground);
+  border-radius: 20px;
+  border: 2px solid var(--scrollbarBorder);
+}
+
+.body::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.subTitle {
+  margin: 0px 5px;
+  color: var(--quintenary);
+  font-size: 25px;
+  font-style: italic;
+  padding: 0px 5px;
+}
+
+.details {
+  display: grid;
+  padding: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0px 10px;
+}
+
+.details span {
+  margin: 0px 10px;
+  color: var(--quintenary);
+  font-size: 22px;
+  font-style: italic;
+  padding: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 10px;
+}

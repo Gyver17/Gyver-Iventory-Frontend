@@ -15,14 +15,20 @@ import ToasterMessage, {
 
 /* ------ Import to Component ------ */
 import styles from "./style.module.css";
-import { getProducts } from "../../../../../api/products";
+import { getProductBuyById } from "../../../../../api/productBuy";
 import { AuthContext } from "../../../../../context/authProvider";
 // import { expresions } from "../../../../../const/ExpReg";
 import { columnModal, searchData } from "../../const/dataTableProps";
 import formartNumber from "../../../../../helpers/formatNumber";
 
 /* ------ Component ------ */
-function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
+function ProductModal({
+	form,
+	setForm,
+	productsInvoice,
+	setProductsInvoice,
+	row,
+}) {
 	// Global State
 	const [state, dispatch] = useContext(AuthContext);
 	const { user, setting } = state;
@@ -32,13 +38,12 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 		render: false,
 		row: {},
 	});
-	const [productQuantityInvoice, setProductQuantityInvoice] = useState({
-		quantity: 0,
-	});
+	const [productQuantityInvoice, setProductQuantityInvoice] = useState();
 	const [separator, setSeparator] = useState({});
 
 	useEffect(() => {
 		const numberFormat = () => {
+			setProductQuantityInvoice({ quantity: 0 })
 			setSelectProduct({ render: false, row: {} });
 			if (setting?.number_format === "0.000,00") {
 				setSeparator({
@@ -58,9 +63,14 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 
 	// Props DataTable
 	const { data, isSuccess, isError } = useQuery(
-		["getProductsInvoice", user],
+		["getProductBuyByIdInvoice", user],
 		async () => {
-			const products = await getProducts(token, dispatch, toast);
+			const products = await getProductBuyById(
+				row.id,
+				token,
+				dispatch,
+				toast
+			);
 			return products;
 		}
 	);
@@ -77,25 +87,62 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 		},
 	];
 
+	const handleChange = (value) => {
+		if (value === undefined) {
+			setProductQuantityInvoice({
+				quantity: 0,
+			});
+		} else {
+			const { row } = selectProduct;
+			const exists = productsInvoice.find(
+				(item) => item.id_product === row.id_product
+			);
+
+			if (exists) {
+				setProductQuantityInvoice({
+					quantity: value + exists.quantity,
+				});
+			} else {
+				setProductQuantityInvoice({
+					quantity: value,
+				});
+			}
+		}
+	};
+
 	const handleClick = () => {
 		const { row } = selectProduct;
-		if (productQuantityInvoice.quantity === 0) {
-			toast.error("Debe Ingresar Una Cantidad a Facturar");
-		} else {
-			const product = {
-				id: row.id,
-				code: row.code,
-				name: row.name,
-				quantity: productQuantityInvoice.quantity,
-				price_buy: row.price_buy,
-				totalPrice: productQuantityInvoice.quantity * row.price_buy,
-			};
-
-			setProductsInvoice([...productsInvoice, product]);
-			setForm({ isOpen: false, title: "" });
-			setProductQuantityInvoice({ quantity: 0 });
-			setSelectProduct({ render: false, row: {} });
+		if (productQuantityInvoice.quantity > row.quantity) {
+			return toast.error("No Hay Suficiente Cantidad Disponible");
 		}
+		if (productQuantityInvoice.quantity === 0) {
+			return toast.error("Debe Ingresar Una Cantidad a Facturar");
+		}
+		const exists = productsInvoice.find(
+			(item) => item.id_product === row.id_product
+		);
+
+		const product = {
+			id_product: row.id_product,
+			id_invoice: row.id_invoice,
+			code: row.code,
+			name: row.name,
+			quantity: productQuantityInvoice.quantity,
+			price_buy: row.price_buy,
+			price_total: productQuantityInvoice.quantity * row.price_buy,
+		};
+		if (exists) {
+			const index = productsInvoice.findIndex(
+				(item) => item.id_product === exists.id_product
+			);
+			const newProductsInvoice = productsInvoice.splice(index, 0);
+			setProductsInvoice([...newProductsInvoice, product]);
+		} else {
+			setProductsInvoice([...productsInvoice, product]);
+		}
+		setForm({ isOpen: false, title: "" });
+		setProductQuantityInvoice({ quantity: 0 });
+		setSelectProduct({ render: false, row: {} });
 	};
 
 	return (
@@ -174,15 +221,7 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 								decimalScale={setting?.qty_decimal}
 								onValueChange={(values) => {
 									const { floatValue } = values;
-									if (floatValue === undefined) {
-										setProductQuantityInvoice({
-											quantity: 0,
-										});
-									} else {
-										setProductQuantityInvoice({
-											quantity: floatValue,
-										});
-									}
+									handleChange(floatValue);
 								}}
 								allowNegative={false}
 							/>
@@ -195,7 +234,7 @@ function ProductModal({ form, setForm, productsInvoice, setProductsInvoice }) {
 								{selectProduct?.row?.quantity &&
 									formartNumber(
 										selectProduct.row.quantity -
-											-productQuantityInvoice?.quantity,
+											productQuantityInvoice?.quantity,
 										setting?.number_format,
 										setting?.qty_decimal
 									)}

@@ -30,6 +30,7 @@ import { createInvoicePurchases } from "../../../api/invoicePurchases";
 import { initialValues, validationSchema, sendValues } from "./const/values";
 import { AuthContext } from "../../../context/authProvider";
 
+/* ------ Component ------ */
 const InvoicePurchases = () => {
     // Global State
     const [state, dispatch] = useContext(AuthContext);
@@ -140,24 +141,23 @@ const InvoicePurchases = () => {
         reset();
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        setRequestLoading(true);
         const values = sendValues(
             data,
             startDate,
             numberInvoice,
             productsInvoice
         );
-        setRequestLoading(true);
-        createInvoicePurchases(
+        const request = await createInvoicePurchases(
             user.token,
             values,
             dispatch,
             toast,
             queryClient
         );
+        if (request) clear();
         setRequestLoading(false);
-        clear();
-        console.log(values);
     };
 
     return (

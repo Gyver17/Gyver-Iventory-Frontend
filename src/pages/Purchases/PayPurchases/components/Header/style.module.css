@@ -1,0 +1,43 @@
+.container {
+	margin: 10px;
+	padding: 10px 0px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: 2px solid var(--secondary);
+	align-items: center;
+}
+
+.title {
+	color: var(--quintenary);
+	padding: 0px 10px;
+	font-size: 30px;
+}
+
+.button {
+  height: 45px;
+  width: 45px;
+  padding: 0px 10px;
+  font-size: 25px;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+.button:hover {
+  color: var(--font_color_1);
+  background: var(--primary);
+  transition: all 0.3s ease-in;
+}
+
+@media screen and (max-width: 450px){
+    .container {
+        flex-direction: column;
+    }
+
+    .title {
+		font-size: 20px;
+	}
+}

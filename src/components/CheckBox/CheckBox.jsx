@@ -7,10 +7,16 @@ function CheckBox({ title, control, name }) {
 		control,
 		name,
 	});
-
 	return (
 		<div className={styles.container}>
-			<input type='checkbox' {...field} />
+			<input
+				type='checkbox'
+				name={field.name}
+				onBlur={field.onBlur}
+				onChange={field.onChange}
+				checked={field.value}
+				inputRef={field.ref}
+			/>
 			<label className={styles.title}>{title}</label>
 		</div>
 	);

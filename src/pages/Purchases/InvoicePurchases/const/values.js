@@ -82,14 +82,16 @@ const sendValues = (data, date, numberInvoice, productsInvoice) => {
 			price_total: product.totalPrice,
 		};
 	});
-	console.log(date.getMonth());
 	const values = {
 		number: numberInvoice,
 		id_supplier: data.id_supplier,
 		id_employee: data.id_employee,
 		products: products,
 		price_sub: truncate(data.subTotal, 2),
-		price_porcent: truncate((data.subTotal + data.iva) / data.discount, 2),
+		price_porcent: truncate(
+			(data.subTotal + data.iva) * (data.discount / 100),
+			2
+		),
 		price_iva: truncate(data.iva, 2),
 		price_total: truncate(data.total, 2),
 		date:

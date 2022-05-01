@@ -1,0 +1,61 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 0px 20px;
+}
+
+/*.container button {
+	width: 40px;
+	justify-content: flex-start;
+	background: none;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: var(--font_color_2);
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+}*/
+
+.container button:hover {
+	color: var(--font_color_1);
+	background: var(--primary);
+	transition: all ease 0.3s;
+}
+
+.property {
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+	font-size: 20px;
+	color: var(--font_color_2);
+}
+
+.propertyName {
+	font-style: italic;
+	padding: 0px 5px;
+}
+
+.propertyValue {
+	font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 10px;
+}
+
+.numberField {
+    width: 80px;
+    height: 30px;
+    font-style: italic;
+    outline: none;
+    border: 2px solid var(--secondary);
+    border-radius: 5px;
+    padding: 0px 5px;
+    background: var(--cardBackground);
+    *margin: 5px 10px;
+}
+
+
