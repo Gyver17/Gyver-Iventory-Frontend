@@ -12,7 +12,7 @@ import DataTable from "../../../components/DataTable/DataTable";
 // import ProductModal from "./components/ProductModal/ProductModal";
 import SessionExpired from "../../../components/SessionExpired/SessionExpired";
 import ToasterMessage, {
-    toast,
+  toast,
 } from "../../../components/ToasterMessage/ToasterMessage";
 import PageLoading from "../../../components/PageLoading/PageLoading";
 // import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
@@ -25,101 +25,112 @@ import styles from "./style.module.css";
 // import { getNumbersInvoice } from "../../../api/numbersInvoice";
 import { getInvoicePayPurchases } from "../../../api/invoicePurchases";
 import formatDate from "../../../helpers/formatDate";
-import { columnInvoice, columnModal, searchData } from "./const/dataTableProps";
+import { columnInvoice } from "./const/dataTableProps";
 import { AuthContext } from "../../../context/authProvider";
 
 /* ------ Component ------ */
 const PayPurchases = () => {
-    // Global State
-    const [state, dispatch] = useContext(AuthContext);
-    const { user, setting } = state;
-    const token = user.token;
+  // Global State
+  const [state, dispatch] = useContext(AuthContext);
+  const { user, setting } = state;
+  const token = user.token;
 
-    const day = new Date();
-    const [startDate, setStartDate] = useState(new Date(day.setDate(0)));
-    const [minWidth, setMinWidth] = useState(false);
-    const [form, setForm] = useState({ isOpen: false, title: "", row: {} });
+  const day = new Date();
+  const [startDate, setStartDate] = useState(new Date(day.setDate(0)));
+  const [minWidth, setMinWidth] = useState(false);
+  const [form, setForm] = useState({
+    isOpen: false,
+    title: "",
+    row: {},
+  });
 
-    // Props DataTable
-    const { data, isSuccess, isError } = useQuery(
-        ["getPayPurchases", startDate],
-        async () => {
-            const date = formatDate(startDate);
-            const invoice = await getInvoicePayPurchases(
-                date,
-                token,
-                dispatch,
-                toast
-            );
-            return invoice;
-        }
-    );
-
-    const queryClient = useQueryClient();
-
-    const findInvoiceByDate = (date) => {
-        setStartDate(date);
-        queryClient.invalidateQueries("getPayPurchases");
-    };
-
-    const action = [
-        {
-            icon: "icon iconplus",
-            render: true,
-            onClick: (row) => 
-                setForm({ isOpen: true, title: "Historial de Pago", row: row }),
-        },
-    ];
-
-    useEffect(() => {
-        setMinWidth(window.innerWidth < 800 && window.innerHeight < 600);
-    }, [setMinWidth]);
-
-    if (isError) {
-        return <SessionExpired serverError={true} />;
+  // Props DataTable
+  const { data, isSuccess, isError } = useQuery(
+    ["getPayPurchases", startDate],
+    async () => {
+      const date = formatDate(startDate);
+      const invoice = await getInvoicePayPurchases(
+        date,
+        token,
+        dispatch,
+        toast
+      );
+      return invoice;
     }
+  );
 
-    if (minWidth) {
-        return (
-            <MinWidth
-                content={
-                    "Debe Tener Una Resolución De Pantalla Mayor a 800x600px"
-                }
-            />
-        );
-    }
+  const queryClient = useQueryClient();
 
+  const findInvoiceByDate = (date) => {
+    setStartDate(date);
+    queryClient.invalidateQueries("getPayPurchases");
+  };
+
+  const action = [
+    {
+      icon: "icon iconplus",
+      render: true,
+      onClick: (row) => {
+        setForm({
+          row: row,
+          isOpen: true,
+          title: "Historial de Pago",
+        });
+      },
+    },
+  ];
+
+  useEffect(() => {
+    setMinWidth(window.innerWidth < 800 && window.innerHeight < 600);
+  }, [setMinWidth]);
+
+  if (isError) {
+    return <SessionExpired serverError={true} />;
+  }
+
+  if (minWidth) {
     return (
-        <>
-            <div className={styles.container}>
-                <Header
-                    title='Compras a Devolver'
-                    startDate={startDate}
-                    setStartDate={findInvoiceByDate}
-                />
-                {isSuccess ? (
-                    <DataTable
-                        numberOfEntries={[5, 10, 15, 20]}
-                        // searchData={searchData}
-                        headerButtons={[]}
-                        header={columnInvoice}
-                        data={data}
-                        aroundCurrentPage={5}
-                        formatDecimal={setting?.number_format}
-                        quantityDecimal={setting?.qty_decimal}
-                        moneySymbol={setting?.first_symbol}
-                        action={action}
-                    />
-                ) : (
-                    <PageLoading />
-                )}
-            </div>
-            <PayModal 
-                form={form}
-                setForm={setForm}
-            />
-        </>
+      <MinWidth
+        content={"Debe Tener Una Resolución De Pantalla Mayor a 800x600px"}
+      />
     );
+  }
+
+  return (
+    <>
+      <ToasterMessage />
+      <div className={styles.container}>
+        <Header
+          title="Compras Por Pagar"
+          startDate={startDate}
+          setStartDate={findInvoiceByDate}
+        />
+        {isSuccess ? (
+          <DataTable
+            numberOfEntries={[5, 10, 15, 20]}
+            // searchData={searchData}
+            headerButtons={[]}
+            header={columnInvoice}
+            data={data}
+            aroundCurrentPage={5}
+            formatDecimal={setting?.number_format}
+            quantityDecimal={setting?.qty_decimal}
+            moneySymbol={setting?.first_symbol}
+            action={action}
+          />
+        ) : (
+          <PageLoading />
+        )}
+      </div>
+      {form.isOpen && (
+        <PayModal
+          form={form}
+          setForm={setForm}
+          queryClient={queryClient}
+        />
+      )}
+    </>
+  );
 };
 
 export default PayPurchases;

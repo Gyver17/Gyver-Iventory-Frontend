@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.container::-webkit-scrollbar:vertical {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-button:increment,
+.container::-webkit-scrollbar-button {
+  display: none;
+}
+
+.container::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarBackground);
+  border-radius: 20px;
+  border: 2px solid var(--scrollbarBorder);
+}
+
+.container::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.numberInputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0px 10px;
+}

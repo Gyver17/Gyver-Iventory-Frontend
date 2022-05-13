@@ -78,32 +78,20 @@ const columnProduct = [
 
 const columnModal = [
     {
-        title: "Codigo",
-        field: "code",
+        title: "Fecha de Pago",
+        field: "payment_date",
         type: "string",
-        sortable: true,
-    },
-    {
-        title: "Nombre",
-        field: "name",
-        type: "string",
-        sortable: true,
-    },
-    {
-        title: "Cantidad",
-        field: "quantity",
-        type: "numeric",
         sortable: false,
     },
     {
-        title: "Precio de Compra",
-        field: "price_buy",
+        title: "Monto Abonado",
+        field: "amount",
         type: "money",
         sortable: false,
     },
     {
-        title: "Precio Total",
-        field: "price_total",
+        title: "Monto Restante",
+        field: "remaining",
         type: "money",
         sortable: false,
     },
